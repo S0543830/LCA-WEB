@@ -1,8 +1,9 @@
-﻿body {
+﻿html, body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     margin: 0;
+    height:100%;
 }
 
 article,
@@ -67,3 +68,35 @@ summary {
 .nav > li > a > img {
     height: 110px;
 }
+
+.container {
+    max-width:1470px;
+}
+
+#startSiteDivLeft {
+    width: 50%;
+    height: 100%;
+    background-color: #404182;
+    float: left;
+    /*für die zentrierung des Bildes bzw. Inhaltes*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#startSiteDivRight {
+    width: 50%;
+    height: 100%;
+    float: right;
+    padding: 10%;
+    /*für die zentrierung des Bildes bzw. Inhaltes*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+    #startSiteDivRight > div > h2 {
+        text-align:center;
+    }
+

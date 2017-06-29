@@ -17,15 +17,14 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a class="logoImage" href="@Url.Action("Startseite", "Index", "Home")">
-                            <img src="../Images/LogoGBUI_dunkelBlauHG.png" />
-                        </a>
+                    <li >
+                        <a href='@Url.Action("Index", "Home")'>
+                            <img src='@Url.Content("../Images/LogoGBUI_dunkelBlauHG.png")' />
+                        </a>  
                     </li>
                     <li>@Html.ActionLink("Info", "About", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
