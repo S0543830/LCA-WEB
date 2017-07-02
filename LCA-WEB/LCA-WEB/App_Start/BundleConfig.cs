@@ -24,8 +24,8 @@ namespace LCA_WEB
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/Style.css"));
+                      "~/Content/Bootstrap.css",
+                      "~/Content/Site.css"));
 
             // Festlegen von "EnableOptimizations" auf "false" für Debugzwecke. Weitere Informationen
             // finden Sie unter "http://go.microsoft.com/fwlink/?LinkId=301862".

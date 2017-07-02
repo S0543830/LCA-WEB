@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
@@ -10,14 +10,14 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @RenderBody()
+    
         <div id="startSiteDivLeft">
-                <img src="../Images/LogoGBUI_dunkelBlauHG.png" />
+                <img src="../Images/LogoGBUI_dunkelBlauHG.png"/>
         </div>
 
         <div id="startSiteDivRight">
-            <div >
-                @Html.Partial("../Account/Login")
+            <div>
+                @RenderBody()
             </div>
         </div>
     @Scripts.Render("~/bundles/jquery")

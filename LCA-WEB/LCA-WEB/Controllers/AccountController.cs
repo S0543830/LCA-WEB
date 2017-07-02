@@ -102,7 +102,7 @@ namespace LCA_WEB.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Konto bestätigen", "Bitte bestätigen Sie Ihr Konto. Klicken Sie dazu <a href=\"" + callbackUrl + "\">hier</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ObjectChoice", "Home");
                 }
                 else
                 {
@@ -437,7 +437,7 @@ namespace LCA_WEB.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -523,7 +523,7 @@ namespace LCA_WEB.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
         }
 

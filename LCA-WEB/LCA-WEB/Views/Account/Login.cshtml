@@ -1,4 +1,8 @@
-﻿@using LCA_WEB.Models
+﻿@{
+    Layout = "~/Views/Shared/_LayoutStart.cshtml";
+}
+
+@using LCA_WEB.Models
 @model LoginViewModel
 
 @{
@@ -40,10 +44,10 @@
                        <br />
                         <br />
                         <p>
-                            @Html.ActionLink("Als neuer Benutzer registrieren", "Register")
+                            @Html.ActionLink("Als neuer Benutzer registrieren", "Register", "Account")
                         </p>
                     </div>
-                   
+                   @Html.ActionLink("Zu den Seiten nach erfolgreichen Login", "ObjectChoice", "Home")
                 </div>
                 @* Diese Option aktivieren, nachdem Sie die Kontobestätigung für die Funktion zum Zurücksetzen des Kennworts aktiviert haben
                 <p>

@@ -10,31 +10,34 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-            </div>
+    <div class="navbar">
+        <a href='@Url.Action("ObjectChoice", "Home")'>
+            <img id="logo" src='@Url.Content("../Images/LogoGBUI_dunkelBlauHG.png")' />
+        </a>
+        <ul>
+            <li>@Html.ActionLink("Hilfe", "Help", "Home")</li>
+            <li>@Html.ActionLink("Info", "About", "Home")</li>
+            <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+            <li>@Html.ActionLink("Logout", "LogOff", "Account")</li>
+        </ul>
+            <h4 class="headlineBox" >@ViewBag.Title</h4>
+     </div>
 
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li >
-                        <a href='@Url.Action("Index", "Home")'>
-                            <img src='@Url.Content("../Images/LogoGBUI_dunkelBlauHG.png")' />
-                        </a>  
-                    </li>
-                    <li>@Html.ActionLink("Info", "About", "Home")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
+
+    <div class="bodyContainer">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Meine ASP.NET-Anwendung</p>
-        </footer>
     </div>
+
+        <footer>
+            <ul>
+                <li>
+                    &copy; @DateTime.Now.Year - HTW Berlin - Studiengang betriebliche Umweltinformatik
+                    <img id="logoBUI" src="../Images/bUI_logo.png" />
+                </li>
+                <li>@Html.ActionLink("Impressum", "Imprint", "Home")</li>
+            </ul>
+        </footer>
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

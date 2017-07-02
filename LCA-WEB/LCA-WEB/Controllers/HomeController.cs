@@ -8,10 +8,10 @@ namespace LCA_WEB.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult LoginStartpage()
+        public ActionResult ObjectChoice()
         {
             return View();
-        }
+        } 
 
         public ActionResult Index()
         {
@@ -32,6 +32,17 @@ namespace LCA_WEB.Controllers
             return View();
         }
 
-       
+        public ActionResult Help()
+        {
+            return View();
+        }
+
+        public ActionResult Imprint()
+        {
+            return View();
+        }
+
+
+
     }
 }
