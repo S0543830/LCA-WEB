@@ -1,0 +1,128 @@
+﻿@model LCA_WEB.Models.ProduktionsmittelViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Produktion</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new {@class ="control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new{@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Name, "", new{@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Menge</th>
+                </tr>
+                <tr>
+                    <th>Rphstoff Typ 1</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.RohstoffTyp_1.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RohstoffTyp_1.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.RohstoffTyp_1.Menge, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RohstoffTyp_1.Menge, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Rphstoff Typ 2</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.RohstoffTyp_2.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RohstoffTyp_2.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.RohstoffTyp_2.Menge, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RohstoffTyp_2.Menge, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Rphstoff Typ 3</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.RohstoffTyp_3.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RohstoffTyp_3.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.RohstoffTyp_3.Menge, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RohstoffTyp_3.Menge, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Rphstoff Typ 4</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.RohstoffTyp_4.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RohstoffTyp_4.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.RohstoffTyp_4.Menge, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RohstoffTyp_4.Menge, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+            @*@Html.LabelFor( model => model.RohstoffTyp_1.Menge, htmlAttributes: new {@class ="control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RohstoffTyp_1.Menge, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.RohstoffTyp_1.Menge, "", new {@class= "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RohstoffTyp_2.Name, htmlAttributes: new{@class ="control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RohstoffTyp_2.Name, new{htmlAttributes = new{@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.RohstoffTyp_2.Name, "", new{@class ="text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RohstoffTyp_3.Name, htmlAttributes: new{@class ="control-label col-md-2"})
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.RohstoffTyp_3.Name)
+                    @Html.ValidationMessageFor(model => model.RohstoffTyp_3.Name, "", new{@class = "text-danger"})
+                </div>
+            </div>
+        </div>*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

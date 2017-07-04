@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProduktionsmodelStoreContainer" CdmEntityContainer="Produktion">
+    <EntitySetMapping Name="Produktionsmittel_DeutscheBahn">
+      <EntityTypeMapping TypeName="Produktionsmodel.Produktionsmittel_DeutscheBahn">
+        <MappingFragment StoreEntitySet="Produktionsmittel_DeutscheBahn">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Rohstoff_Typ_1" ColumnName="Rohstoff_Typ_1" />
+          <ScalarProperty Name="Rohstoff_Typ_2" ColumnName="Rohstoff_Typ_2" />
+          <ScalarProperty Name="Rohstoff_Typ_3" ColumnName="Rohstoff_Typ_3" />
+          <ScalarProperty Name="Rohstoff_Typ_4" ColumnName="Rohstoff_Typ_4" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rohstoffs">
+      <EntityTypeMapping TypeName="Produktionsmodel.Rohstoff">
+        <MappingFragment StoreEntitySet="Rohstoff">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Menge" ColumnName="Menge" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
