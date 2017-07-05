@@ -181,13 +181,46 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProduktController.cs" />
     <Compile Include="Controllers\ProduktionsmittelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AllgemeinesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllgemeinesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AllgemeinesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AllgemeinesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllgemeinesModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDatenModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDatenModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDatenModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDatenModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDatenModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDatenModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProduktionModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,10 +240,20 @@
     <Compile Include="Models\Produktionsmittel_DeutscheBahn.cs">
       <DependentUpon>ProduktionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProduktRohstoffUmweltindikator.cs">
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProduktTyp.cs">
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProduktViewModel.cs" />
     <Compile Include="Models\Rohstoff.cs">
-      <DependentUpon>ProduktionModel.tt</DependentUpon>
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RohstoffViewModel.cs" />
+    <Compile Include="Models\Umweltindikator.cs">
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -221,6 +264,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\AllgemeinesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AllgemeinesModel.edmx</DependentUpon>
+      <LastGenOutput>AllgemeinesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AllgemeinesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AllgemeinesModel.edmx</DependentUpon>
+      <LastGenOutput>AllgemeinesModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProductDatenModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductDatenModel.edmx</DependentUpon>
+      <LastGenOutput>ProductDatenModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProductDatenModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductDatenModel.edmx</DependentUpon>
+      <LastGenOutput>ProductDatenModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ProduktionModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ProduktionModel.edmx</DependentUpon>
@@ -239,6 +302,20 @@
     </EntityDeploy>
     <Content Include="Models\ProduktionModel.edmx.diagram">
       <DependentUpon>ProduktionModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ProductDatenModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductDatenModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ProductDatenModel.edmx.diagram">
+      <DependentUpon>ProductDatenModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\AllgemeinesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AllgemeinesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AllgemeinesModel.edmx.diagram">
+      <DependentUpon>AllgemeinesModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -288,6 +365,9 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Produktionsmittel\Index.cshtml" />
     <Content Include="Views\Produktionsmittel\Create.cshtml" />
+    <Content Include="Views\Produkt\Index.cshtml" />
+    <Content Include="Views\Produkt\Create.cshtml" />
+    <Content Include="Views\Produkt\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

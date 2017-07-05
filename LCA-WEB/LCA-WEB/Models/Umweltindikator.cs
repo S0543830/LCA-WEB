@@ -12,16 +12,16 @@ namespace LCA_WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Rohstoff
+    public partial class Umweltindikator
     {
-        public Rohstoff()
+        public Umweltindikator()
         {
             this.ProduktRohstoffUmweltindikators = new HashSet<ProduktRohstoffUmweltindikator>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<decimal> Menge_in_t { get; set; }
+        public Nullable<int> Scope { get; set; }
     
         public virtual ICollection<ProduktRohstoffUmweltindikator> ProduktRohstoffUmweltindikators { get; set; }
     }
