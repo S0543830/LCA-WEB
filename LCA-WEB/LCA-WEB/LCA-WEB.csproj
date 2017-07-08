@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -178,17 +181,81 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProduktController.cs" />
+    <Compile Include="Controllers\ProduktionsmittelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AllgemeinesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllgemeinesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AllgemeinesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AllgemeinesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllgemeinesModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDatenModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDatenModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDatenModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDatenModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDatenModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDatenModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProduktionModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProduktionModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProduktionModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProduktionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProduktionModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProduktionModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProduktionsmittelViewModel.cs" />
+    <Compile Include="Models\Produktionsmittel_DeutscheBahn.cs">
+      <DependentUpon>ProduktionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProduktRohstoffUmweltindikator.cs">
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProduktTyp.cs">
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProduktViewModel.cs" />
+    <Compile Include="Models\Rohstoff.cs">
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RohstoffViewModel.cs" />
+    <Compile Include="Models\Umweltindikator.cs">
+      <DependentUpon>AllgemeinesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="WcfDataService1.svc.cs">
-      <DependentUpon>WcfDataService1.svc</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -197,8 +264,59 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\AllgemeinesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AllgemeinesModel.edmx</DependentUpon>
+      <LastGenOutput>AllgemeinesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AllgemeinesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AllgemeinesModel.edmx</DependentUpon>
+      <LastGenOutput>AllgemeinesModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProductDatenModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductDatenModel.edmx</DependentUpon>
+      <LastGenOutput>ProductDatenModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProductDatenModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductDatenModel.edmx</DependentUpon>
+      <LastGenOutput>ProductDatenModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProduktionModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProduktionModel.edmx</DependentUpon>
+      <LastGenOutput>ProduktionModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProduktionModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProduktionModel.edmx</DependentUpon>
+      <LastGenOutput>ProduktionModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\ProduktionModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProduktionModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ProduktionModel.edmx.diagram">
+      <DependentUpon>ProduktionModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ProductDatenModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductDatenModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ProductDatenModel.edmx.diagram">
+      <DependentUpon>ProductDatenModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\AllgemeinesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AllgemeinesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AllgemeinesModel.edmx.diagram">
+      <DependentUpon>AllgemeinesModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -211,8 +329,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="WcfDataService1.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -242,6 +361,13 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Produktionsmittel\Index.cshtml" />
+    <Content Include="Views\Produktionsmittel\Create.cshtml" />
+    <Content Include="Views\Produkt\Index.cshtml" />
+    <Content Include="Views\Produkt\Create.cshtml" />
+    <Content Include="Views\Produkt\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -252,6 +378,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

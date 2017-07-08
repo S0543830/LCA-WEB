@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Produktionsmodel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Produktionsmittel_DeutscheBahn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="50" />
+    <Property Name="Rohstoff_Typ_1" Type="int" Nullable="false" />
+    <Property Name="Rohstoff_Typ_2" Type="int" Nullable="false" />
+    <Property Name="Rohstoff_Typ_3" Type="int" Nullable="false" />
+    <Property Name="Rohstoff_Typ_4" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rohstoff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="20" />
+    <Property Name="Menge" Type="numeric" Precision="18" Scale="2" />
+  </EntityType>
+  <Association Name="FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_1">
+    <End Role="Rohstoff" Type="Self.Rohstoff" Multiplicity="1" />
+    <End Role="Produktionsmittel_DeutscheBahn" Type="Self.Produktionsmittel_DeutscheBahn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rohstoff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Produktionsmittel_DeutscheBahn">
+        <PropertyRef Name="Rohstoff_Typ_1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_2">
+    <End Role="Rohstoff" Type="Self.Rohstoff" Multiplicity="1" />
+    <End Role="Produktionsmittel_DeutscheBahn" Type="Self.Produktionsmittel_DeutscheBahn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rohstoff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Produktionsmittel_DeutscheBahn">
+        <PropertyRef Name="Rohstoff_Typ_2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_3">
+    <End Role="Rohstoff" Type="Self.Rohstoff" Multiplicity="1" />
+    <End Role="Produktionsmittel_DeutscheBahn" Type="Self.Produktionsmittel_DeutscheBahn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rohstoff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Produktionsmittel_DeutscheBahn">
+        <PropertyRef Name="Rohstoff_Typ_3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_4">
+    <End Role="Rohstoff" Type="Self.Rohstoff" Multiplicity="1" />
+    <End Role="Produktionsmittel_DeutscheBahn" Type="Self.Produktionsmittel_DeutscheBahn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rohstoff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Produktionsmittel_DeutscheBahn">
+        <PropertyRef Name="Rohstoff_Typ_4" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProduktionsmodelStoreContainer">
+    <EntitySet Name="Produktionsmittel_DeutscheBahn" EntityType="Self.Produktionsmittel_DeutscheBahn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rohstoff" EntityType="Self.Rohstoff" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_1" Association="Self.FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_1">
+      <End Role="Rohstoff" EntitySet="Rohstoff" />
+      <End Role="Produktionsmittel_DeutscheBahn" EntitySet="Produktionsmittel_DeutscheBahn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_2" Association="Self.FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_2">
+      <End Role="Rohstoff" EntitySet="Rohstoff" />
+      <End Role="Produktionsmittel_DeutscheBahn" EntitySet="Produktionsmittel_DeutscheBahn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_3" Association="Self.FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_3">
+      <End Role="Rohstoff" EntitySet="Rohstoff" />
+      <End Role="Produktionsmittel_DeutscheBahn" EntitySet="Produktionsmittel_DeutscheBahn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_4" Association="Self.FK_dbo_Produktionsmittel_DeutscheBahn_dbo_Rohstoff_Rohstoff_Typ_4">
+      <End Role="Rohstoff" EntitySet="Rohstoff" />
+      <End Role="Produktionsmittel_DeutscheBahn" EntitySet="Produktionsmittel_DeutscheBahn" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
