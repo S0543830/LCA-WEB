@@ -1,0 +1,108 @@
+﻿@model LCA_WEB.Models.Product
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Produktion</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <table>
+                <tr>
+                    <th>Name:</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Durability:</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Menge, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Menge, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>TotalWeight:</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nutzungsdauer_in_Jahre, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nutzungsdauer_in_Jahre, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>DateOfCreation:</th>
+                    <td>
+                        <div class="col-md-10">
+                           <!-- <input type="text" value="9/23/2009" style="width: 100px;" readonly="readonly" name="Date" id="Date" class="hasDatepicker" />-->
+                            @Html.EditorFor(model => model.DateOfCreation, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DateOfCreation, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>DateOfChanging:</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DateOfChanging, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DateOfChanging, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>CreatedBy:</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ChangeBy:</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ChangeBy, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ChangeBy, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Typ_Id:</th>
+                    <td>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Typ_Id, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Typ_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
