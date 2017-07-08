@@ -180,6 +180,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AllgemeinController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProduktController.cs" />
     <Compile Include="Controllers\ProduktionsmittelController.cs" />
@@ -258,12 +259,19 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Bootsstrap_Cosmos.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Cosmos.css" />
+    <Content Include="Content\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\bUI_logo.png" />
+    <Content Include="Images\CradleToGrave.png" />
+    <Content Include="Images\LogoGBUI_dunkelBlauHG.png" />
+    <Content Include="Images\Ökobilanz.png" />
     <Content Include="Models\AllgemeinesModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AllgemeinesModel.edmx</DependentUpon>
@@ -360,7 +368,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_LayoutStart.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Produktionsmittel\Index.cshtml" />
@@ -368,6 +376,10 @@
     <Content Include="Views\Produkt\Index.cshtml" />
     <Content Include="Views\Produkt\Create.cshtml" />
     <Content Include="Views\Produkt\Edit.cshtml" />
+    <Content Include="Views\Allgemein\Index.cshtml" />
+    <Content Include="Views\Allgemein\Create.cshtml" />
+    <Content Include="Views\Home\Imprint.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -400,7 +412,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>11923</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:11923/</IISUrl>
+          <IISUrl>http://localhost:11921/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
