@@ -1,0 +1,253 @@
+﻿/*Dunkelgrau: #282c2b 
+    Gelbgrün: #cbcb3d
+    lila: #917197;
+*/
+
+html, body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    margin: 0px;
+    height: 100%;
+    position: relative;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+
+    .container {
+    max-width: 1470px;
+}
+
+#startSiteDivLeft {
+    width: 50%;
+    height: 100%;
+    background-color: #282952;
+    float: left;
+    /*für die zentrierung des Bildes bzw. Inhaltes*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#startSiteDivRight {
+    width: 50%;
+    height: 100%;
+    float: right;
+    padding: 10%;
+    /*für die zentrierung des Bildes bzw. Inhaltes*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    #startSiteDivRight > div > h2 {
+        text-align: center;
+        color: #917197;
+    }
+
+#logo {
+    float: left;
+    margin-top: 5px;
+    margin-left: 30px;
+    vertical-align:middle;
+    width: 60px;
+}
+
+.navbar {
+    position: fixed;
+    top:0;
+    width:100%;
+    background-color: #282952;
+    border-color: none;
+    border-radius:0px;
+    margin:0px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-top:42px;
+    margin-right: 65%;
+    height:45px;
+    }
+
+    .navbar li {
+        float: right;
+        margin-left: 65px;
+        vertical-align: bottom;
+    }
+
+.navbar li a {
+     display: block;
+     color: white;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+    }
+
+.navbar li a:hover {
+        border-style: solid;
+        border-width: 1px;
+        border-color: #cbcb3d;
+    } 
+ 
+ 
+ .btn-default {
+        color: #fff;
+        background-color: #282c2b;
+        border: none;
+    }
+
+.headlineBox {
+    width: 100%;
+    background-color: #917197;
+    border-color: none;
+    height: 25px;
+    text-align:center;
+    margin:0px;
+    padding-top:2.5px;
+}
+
+#logoBUI {
+    width:15px;
+}
+
+footer {
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    color: white;
+    font-size: smaller;
+    bottom: 0;
+    width: 100%;
+    background-color: #282952;
+    border-color: none;
+    border-radius: 0px;
+    margin: 0px;
+
+}
+
+footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+    footer li {
+        float: left;
+        margin-left: 10px;
+        vertical-align: bottom;
+        color: white;
+        display: block;
+        text-align: center;
+        padding: 3px 16px;
+        text-decoration: none;
+    }
+
+        footer li a {
+            color: white;
+
+        }
+
+.bodyContainer {
+    margin: 125px 30px auto;
+    top: 125px;
+}
+
+.textblock {
+    text-align:center;
+}
+
+#centeredBox {
+    align-items:center;
+    vertical-align:central;
+
+}
+
+#content-centered {
+    width: 550px;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#content-centered > span {
+    width: 550px;
+    height: 100%;
+    display: inline-block;
+    margin-left: -10px;
+    vertical-align: middle;
+    font-size:smaller;
+}
+
+#content-centered > img {
+        vertical-align: middle;
+        border: 0 none;
+        width: 550px;
+    }
+
+.boxAddObject {
+    width: 50px;
+    height: 50px;
+    background-color: #282c2b;
+    color: white;
+    border: none;
+    align-items: center;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0px;
+    display: table-cell;
+    font-size: 20px;
+}
+    .boxAddObject:hover {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #cbcb3d;
+    } 
+.listObjectChoice {
+    width: 90%;
+    height: auto;
+    background-color: #282c2b;
+    color: white;
+    border: none;
+    margin: 2px;
+    font-size: 20px;
+}
+
+
+    .listObjectChoice:hover {
+        border-style: solid;
+        border-width: 3px;
+        border-color: #cbcb3d;
+    } 
+
+.ObjectBoxes {
+    margin:140px 40px auto;
+}

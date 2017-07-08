@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AllgemeinModelView" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Menge" Type="Int32" />
+    <Property Name="Nutzungsdauer_in_Jahre" Type="Double" />
+    <Property Name="Gesamtgewicht" Type="Double" />
+    <Property Name="DateOfCreation" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateOfChanging" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ChangeBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Typ_Id" Type="Int32" />
+    <NavigationProperty Name="ProduktTyp" Relationship="Self.FK_dbo_Products_Typ_Id" FromRole="Products" ToRole="ProduktTyp" />
+    <NavigationProperty Name="ProduktRohstoffUmweltindikators" Relationship="Self.FK_dbo_ProduktRohstoffUmweltindikator_Produkt_Id" FromRole="Products" ToRole="ProduktRohstoffUmweltindikator" />
+  </EntityType>
+  <EntityType Name="ProduktTyp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Typ" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_Typ_Id" FromRole="ProduktTyp" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Rohstoff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Menge_in_t" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="ProduktRohstoffUmweltindikators" Relationship="Self.FK_dbo_ProduktRohstoffUmweltindikator_Rohstoff_Id" FromRole="Rohstoff" ToRole="ProduktRohstoffUmweltindikator" />
+  </EntityType>
+  <EntityType Name="Umweltindikator">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Scope" Type="Int32" />
+    <NavigationProperty Name="ProduktRohstoffUmweltindikators" Relationship="Self.FK_dbo_ProduktRohstoffUmweltindikator_Umweltindikator_Id" FromRole="Umweltindikator" ToRole="ProduktRohstoffUmweltindikator" />
+  </EntityType>
+  <EntityType Name="ProduktRohstoffUmweltindikator">
+    <Key>
+      <PropertyRef Name="Produkt_Id" />
+      <PropertyRef Name="Rohstoff_Id" />
+      <PropertyRef Name="Umweltindikator_Id" />
+    </Key>
+    <Property Name="Produkt_Id" Type="Int32" Nullable="false" />
+    <Property Name="Rohstoff_Id" Type="Int32" Nullable="false" />
+    <Property Name="Umweltindikator_Id" Type="Int32" Nullable="false" />
+    <Property Name="Rohstoff_Menge_in_t" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Umweltindikator_Menge" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_dbo_ProduktRohstoffUmweltindikator_Produkt_Id" FromRole="ProduktRohstoffUmweltindikator" ToRole="Products" />
+    <NavigationProperty Name="Rohstoff" Relationship="Self.FK_dbo_ProduktRohstoffUmweltindikator_Rohstoff_Id" FromRole="ProduktRohstoffUmweltindikator" ToRole="Rohstoff" />
+    <NavigationProperty Name="Umweltindikator" Relationship="Self.FK_dbo_ProduktRohstoffUmweltindikator_Umweltindikator_Id" FromRole="ProduktRohstoffUmweltindikator" ToRole="Umweltindikator" />
+  </EntityType>
+  <Association Name="FK_dbo_Products_Typ_Id">
+    <End Role="ProduktTyp" Type="Self.ProduktTyp" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProduktTyp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="Typ_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ProduktRohstoffUmweltindikator_Produkt_Id">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProduktRohstoffUmweltindikator" Type="Self.ProduktRohstoffUmweltindikator" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProduktRohstoffUmweltindikator">
+        <PropertyRef Name="Produkt_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ProduktRohstoffUmweltindikator_Rohstoff_Id">
+    <End Role="Rohstoff" Type="Self.Rohstoff" Multiplicity="1" />
+    <End Role="ProduktRohstoffUmweltindikator" Type="Self.ProduktRohstoffUmweltindikator" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rohstoff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProduktRohstoffUmweltindikator">
+        <PropertyRef Name="Rohstoff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ProduktRohstoffUmweltindikator_Umweltindikator_Id">
+    <End Role="Umweltindikator" Type="Self.Umweltindikator" Multiplicity="1" />
+    <End Role="ProduktRohstoffUmweltindikator" Type="Self.ProduktRohstoffUmweltindikator" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Umweltindikator">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProduktRohstoffUmweltindikator">
+        <PropertyRef Name="Umweltindikator_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBLCA" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProduktTyps" EntityType="Self.ProduktTyp" />
+    <EntitySet Name="Rohstoffs" EntityType="Self.Rohstoff" />
+    <EntitySet Name="Umweltindikators" EntityType="Self.Umweltindikator" />
+    <EntitySet Name="ProduktRohstoffUmweltindikators" EntityType="Self.ProduktRohstoffUmweltindikator" />
+    <AssociationSet Name="FK_dbo_Products_Typ_Id" Association="Self.FK_dbo_Products_Typ_Id">
+      <End Role="ProduktTyp" EntitySet="ProduktTyps" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ProduktRohstoffUmweltindikator_Produkt_Id" Association="Self.FK_dbo_ProduktRohstoffUmweltindikator_Produkt_Id">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProduktRohstoffUmweltindikator" EntitySet="ProduktRohstoffUmweltindikators" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ProduktRohstoffUmweltindikator_Rohstoff_Id" Association="Self.FK_dbo_ProduktRohstoffUmweltindikator_Rohstoff_Id">
+      <End Role="Rohstoff" EntitySet="Rohstoffs" />
+      <End Role="ProduktRohstoffUmweltindikator" EntitySet="ProduktRohstoffUmweltindikators" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ProduktRohstoffUmweltindikator_Umweltindikator_Id" Association="Self.FK_dbo_ProduktRohstoffUmweltindikator_Umweltindikator_Id">
+      <End Role="Umweltindikator" EntitySet="Umweltindikators" />
+      <End Role="ProduktRohstoffUmweltindikator" EntitySet="ProduktRohstoffUmweltindikators" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
