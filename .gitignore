@@ -23,6 +23,8 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+bin/
+obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -251,6 +253,10 @@ typings/
 
 # Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
 *.vbw
+
+#Applicationhost config
+app
+licationhost.config
 
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
