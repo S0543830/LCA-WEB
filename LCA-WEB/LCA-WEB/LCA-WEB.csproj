@@ -206,7 +206,6 @@
     <Compile Include="Models\EndOfLifeData.cs">
       <DependentUpon>DBLCAwebModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Produkt.cs">
       <DependentUpon>DBLCAwebModel.tt</DependentUpon>
@@ -220,7 +219,6 @@
     <Compile Include="Models\Rohstoff.cs">
       <DependentUpon>DBLCAwebModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RohstoffViewModel.cs" />
     <Compile Include="Models\Umweltindikator.cs">
       <DependentUpon>DBLCAwebModel.tt</DependentUpon>
     </Compile>
