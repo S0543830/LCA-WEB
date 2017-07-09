@@ -8,15 +8,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LCA_WEB.Models;
+using Microsoft.AspNet.Identity;
+
 namespace LCA_WEB.Controllers
 {
     public class HomeController : Controller
     {
 
         private DBEntities _db = new DBEntities();
+
         public ActionResult Index()
         {
-
             return View(_db.Produkts.ToList());
         }
 
@@ -62,6 +64,8 @@ namespace LCA_WEB.Controllers
                 {
                     produktDetails.DateOfChanging = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,DateTime.Now.Hour,DateTime.Now.Minute,DateTime.Now.Second);
                     produktDetails.DateOfCreation = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+                    produktDetails.CreatedBy = Request.IsAuthenticated ? User.Identity.GetUserName() : "Besucher";
+                    produktDetails.ChangedBy = Request.IsAuthenticated ? User.Identity.GetUserName() : "Besucher";
                     _db.Produkts.Add(produktDetails);
                     _db.SaveChanges();
                     return RedirectToAction("Index");
@@ -125,7 +129,7 @@ namespace LCA_WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,DateOfCreation")] Produkt produkt)
+        public ActionResult Edit([Bind(Include = "Id,Name,DateOfCreation,CreatedBy")] Produkt produkt)
         {
             try
             {
@@ -133,7 +137,7 @@ namespace LCA_WEB.Controllers
                 {
                     _db.Entry(produkt).State = EntityState.Modified;
                     produkt.DateOfChanging = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-
+                    produkt.ChangedBy = Request.IsAuthenticated ? User.Identity.GetUserName() : "Besucher";
                     _db.SaveChanges();
                     return RedirectToAction("Index");
                 }
