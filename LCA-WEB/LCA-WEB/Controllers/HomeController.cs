@@ -19,7 +19,15 @@ namespace LCA_WEB.Controllers
 
         public ActionResult Index()
         {
-            return View(_db.Produkts.ToList());
+            if (Request.IsAuthenticated)
+            {
+                return View(_db.Produkts.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            
         }
 
         public ActionResult About()
