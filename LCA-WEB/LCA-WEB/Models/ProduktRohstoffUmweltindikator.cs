@@ -17,10 +17,11 @@ namespace LCA_WEB.Models
         public int Produkt_Id { get; set; }
         public int Rohstoff_Id { get; set; }
         public int Umweltindikator_Id { get; set; }
+        public int Phase { get; set; }
         public Nullable<decimal> Rohstoff_Menge_in_t { get; set; }
         public Nullable<decimal> Umweltindikator_Menge { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Produkt Produkt { get; set; }
         public virtual Rohstoff Rohstoff { get; set; }
         public virtual Umweltindikator Umweltindikator { get; set; }
     }

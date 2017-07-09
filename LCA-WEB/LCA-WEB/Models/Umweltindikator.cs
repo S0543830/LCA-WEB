@@ -14,6 +14,7 @@ namespace LCA_WEB.Models
     
     public partial class Umweltindikator
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Umweltindikator()
         {
             this.ProduktRohstoffUmweltindikators = new HashSet<ProduktRohstoffUmweltindikator>();
@@ -23,6 +24,7 @@ namespace LCA_WEB.Models
         public string Name { get; set; }
         public Nullable<int> Scope { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProduktRohstoffUmweltindikator> ProduktRohstoffUmweltindikators { get; set; }
     }
 }

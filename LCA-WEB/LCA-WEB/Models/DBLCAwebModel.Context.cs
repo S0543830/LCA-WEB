@@ -13,10 +13,10 @@ namespace LCA_WEB.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBLCA : DbContext
+    public partial class DBEntities : DbContext
     {
-        public DBLCA()
-            : base("name=DBLCA")
+        public DBEntities()
+            : base("name=DBEntities")
         {
         }
     
@@ -25,10 +25,12 @@ namespace LCA_WEB.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Produkt> Produkts { get; set; }
         public virtual DbSet<ProduktTyp> ProduktTyps { get; set; }
         public virtual DbSet<Rohstoff> Rohstoffs { get; set; }
         public virtual DbSet<Umweltindikator> Umweltindikators { get; set; }
+        public virtual DbSet<EndOfLifeData> EndOfLifeDatas { get; set; }
         public virtual DbSet<ProduktRohstoffUmweltindikator> ProduktRohstoffUmweltindikators { get; set; }
     }
 }

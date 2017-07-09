@@ -12,18 +12,16 @@ namespace LCA_WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Produktionsmittel_DeutscheBahn
+    public partial class EndOfLifeData
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Rohstoff_Typ_1 { get; set; }
-        public int Rohstoff_Typ_2 { get; set; }
-        public int Rohstoff_Typ_3 { get; set; }
-        public int Rohstoff_Typ_4 { get; set; }
+        public int Produkt_Id { get; set; }
+        public int Rohstoff_Id { get; set; }
+        public Nullable<decimal> Recyclingfaehig { get; set; }
+        public Nullable<decimal> Entsorgungskosten { get; set; }
+        public Nullable<decimal> Recyclingerloese { get; set; }
+        public Nullable<decimal> WeiterverkaufPM { get; set; }
     
+        public virtual Produkt Produkt { get; set; }
         public virtual Rohstoff Rohstoff { get; set; }
-        public virtual Rohstoff Rohstoff1 { get; set; }
-        public virtual Rohstoff Rohstoff2 { get; set; }
-        public virtual Rohstoff Rohstoff3 { get; set; }
     }
 }

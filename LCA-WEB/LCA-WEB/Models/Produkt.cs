@@ -11,11 +11,14 @@ namespace LCA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Product
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class Produkt
     {
-        public Product()
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Produkt()
         {
+            this.EndOfLifeDatas = new HashSet<EndOfLifeData>();
             this.ProduktRohstoffUmweltindikators = new HashSet<ProduktRohstoffUmweltindikator>();
         }
     
@@ -24,13 +27,26 @@ namespace LCA_WEB.Models
         public Nullable<int> Menge { get; set; }
         public Nullable<double> Nutzungsdauer_in_Jahre { get; set; }
         public Nullable<double> Gesamtgewicht { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DateOfCreation { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DateOfChanging { get; set; }
         public string CreatedBy { get; set; }
-        public string ChangeBy { get; set; }
+        public string ChangedBy { get; set; }
         public Nullable<int> Typ_Id { get; set; }
+        public Nullable<decimal> Produktionsmittelkosten { get; set; }
+        public Nullable<double> Energieverbrauch_in_GJ { get; set; }
+        public Nullable<double> CO2_Ausstoss_t_a { get; set; }
+        public Nullable<double> Energiekosten_pro_GJ { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EndOfLifeData> EndOfLifeDatas { get; set; }
         public virtual ProduktTyp ProduktTyp { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProduktRohstoffUmweltindikator> ProduktRohstoffUmweltindikators { get; set; }
     }
 }
