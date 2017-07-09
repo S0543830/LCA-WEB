@@ -23,15 +23,18 @@ namespace LCA_WEB.Models
         }
     
         public int Id { get; set; }
+        [Required(ErrorMessage = "Bitte einen Namen eingeben.")]
+        [Display(Name = "Produktname")]
         public string Name { get; set; }
+
         public Nullable<int> Menge { get; set; }
         public Nullable<double> Nutzungsdauer_in_Jahre { get; set; }
         public Nullable<double> Gesamtgewicht { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DateOfCreation { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DateOfChanging { get; set; }
         public string CreatedBy { get; set; }
         public string ChangedBy { get; set; }
