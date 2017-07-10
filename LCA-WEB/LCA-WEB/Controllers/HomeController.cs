@@ -7,7 +7,7 @@ using System.Net;
 using System.Web.Mvc;
 using LCA_WEB.Models;
 using Microsoft.AspNet.Identity;
-
+using PagedList;
 namespace LCA_WEB.Controllers
 {
     public class HomeController : Controller
@@ -15,11 +15,64 @@ namespace LCA_WEB.Controllers
 
         private DBEntities _db = new DBEntities();
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOn, string orderBy,
+            string pSortOn, string keyword, int? page)
         {
             if (Request.IsAuthenticated)
             {
-                return View(_db.Produkts.ToList());
+
+                int recordsPerPage = 10;
+                if (!page.HasValue)
+                {
+                    page = 1; // set initial page value
+                    if (string.IsNullOrWhiteSpace(orderBy) || orderBy.Equals("asc"))
+                    {
+                        orderBy = "desc";
+                    }
+                    else
+                    {
+                        orderBy = "asc";
+                    }
+                }
+                if (!string.IsNullOrWhiteSpace(sortOn) && !sortOn.Equals(pSortOn,
+                        StringComparison.CurrentCultureIgnoreCase))
+                {
+                    orderBy = "asc";
+                }
+
+                ViewBag.OrderBy = orderBy;
+                ViewBag.SortOn = sortOn;
+                ViewBag.Keyword = keyword;
+
+                var list = _db.Produkts.AsQueryable();
+
+                switch (sortOn)
+                {
+                    case "Name":
+                        if (orderBy.Equals("desc"))
+                        {
+                            list = list.OrderByDescending(p => p.Name);
+                        }
+                        else
+                        {
+                            list = list.OrderBy(p => p.Name);
+                        }
+                        break;
+                    default:
+                        list = list.OrderBy(p => p.Id);
+                        break;
+                }
+                if (!string.IsNullOrWhiteSpace(keyword))
+                {
+                    list = list.Where(f => f.Name.StartsWith(keyword));
+                }
+                var finalList = list.ToPagedList(page.Value, recordsPerPage);
+                return View(finalList);
+
+
+
+                //int recordsPerPage = 10;
+                //return View(_db.Produkts.ToList().ToPagedList(page, recordsPerPage));
             }
             else
             {
@@ -27,6 +80,9 @@ namespace LCA_WEB.Controllers
             }
             
         }
+
+       
+
 
         public ActionResult About()
         {

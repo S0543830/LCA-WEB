@@ -11,30 +11,20 @@ namespace LCA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Produkt
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Produkt()
         {
-            this.EndOfLifeDatas = new HashSet<EndOfLifeData>();
             this.ProduktRohstoffUmweltindikators = new HashSet<ProduktRohstoffUmweltindikator>();
         }
     
         public int Id { get; set; }
-        [Required(ErrorMessage = "Bitte einen Namen eingeben.")]
-        [Display(Name = "Produktname")]
         public string Name { get; set; }
-
         public Nullable<int> Menge { get; set; }
         public Nullable<double> Nutzungsdauer_in_Jahre { get; set; }
         public Nullable<double> Gesamtgewicht { get; set; }
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DateOfCreation { get; set; }
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DateOfChanging { get; set; }
         public string CreatedBy { get; set; }
         public string ChangedBy { get; set; }
@@ -44,12 +34,7 @@ namespace LCA_WEB.Models
         public Nullable<double> CO2_Ausstoss_t_a { get; set; }
         public Nullable<double> Energiekosten_pro_GJ { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
-        public virtual AspNetUser AspNetUser1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EndOfLifeData> EndOfLifeDatas { get; set; }
         public virtual ProduktTyp ProduktTyp { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProduktRohstoffUmweltindikator> ProduktRohstoffUmweltindikators { get; set; }
     }
 }

@@ -4,22 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aae4184fe7654b27874501a0c9227dd3" Name="Diagram1">
-        <EntityTypeShape EntityType="DBLCAwebModel.AspNetUser" Width="1.5" PointX="0.5" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLCAwebModel.Produkt" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLCAwebModel.ProduktTyp" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLCAwebModel.Rohstoff" Width="1.5" PointX="8.375" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLCAwebModel.Umweltindikator" Width="1.5" PointX="8.375" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLCAwebModel.EndOfLifeData" Width="1.5" PointX="5.875" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLCAwebModel.ProduktRohstoffUmweltindikator" Width="1.5" PointX="5.875" PointY="0.5" IsExpanded="true" />
-        <AssociationConnector Association="DBLCAwebModel.FK_dbo_Produkt_ChangedBy" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLCAwebModel.FK_dbo_Produkt_CreatedBy" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLCAwebModel.FK_dbo_EndOfLifeData_Produkt_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLCAwebModel.FK_dbo_Produkt_Typ_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLCAwebModel.FK_dbo_ProduktRohstoffUmweltindikator_Produkt_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLCAwebModel.FK_dbo_EndOfLifeData_Rohstoff_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLCAwebModel.FK_dbo_ProduktRohstoffUmweltindikator_Rohstoff_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLCAwebModel.FK_dbo_ProduktRohstoffUmweltindikator_Umweltindikator_Id" ManuallyRouted="false" />
+      <Diagram DiagramId="66473ed4958d4097a61f226740104a69" Name="Diagram1">
+        <EntityTypeShape EntityType="DBModel.AspNetUser" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Produkt" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.ProduktTyp" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Rohstoff" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Umweltindikator" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.ProduktRohstoffUmweltindikator" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="DBModel.FK_dbo_Produkt_Typ_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_dbo_ProduktRohstoffUmweltindikator_Produkt_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_dbo_ProduktRohstoffUmweltindikator_Rohstoff_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_dbo_Rohstoff_Id" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

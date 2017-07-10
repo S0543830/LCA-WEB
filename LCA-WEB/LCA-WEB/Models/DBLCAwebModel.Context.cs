@@ -30,7 +30,6 @@ namespace LCA_WEB.Models
         public virtual DbSet<ProduktTyp> ProduktTyps { get; set; }
         public virtual DbSet<Rohstoff> Rohstoffs { get; set; }
         public virtual DbSet<Umweltindikator> Umweltindikators { get; set; }
-        public virtual DbSet<EndOfLifeData> EndOfLifeDatas { get; set; }
         public virtual DbSet<ProduktRohstoffUmweltindikator> ProduktRohstoffUmweltindikators { get; set; }
     }
 }

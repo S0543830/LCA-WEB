@@ -14,7 +14,6 @@ namespace LCA_WEB.Models
     
     public partial class ProduktTyp
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProduktTyp()
         {
             this.Produkts = new HashSet<Produkt>();
@@ -24,7 +23,6 @@ namespace LCA_WEB.Models
         public string Name { get; set; }
         public string Typ { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Produkt> Produkts { get; set; }
     }
 }
