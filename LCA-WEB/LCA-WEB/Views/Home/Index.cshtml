@@ -12,7 +12,7 @@
         @using (Html.BeginForm())
         {
             <p>
-                <input type="text" name="keyword" required value="@ViewBag.Keyword" />
+                <input type="text" name="keyword" @*required value="@ViewBag.Keyword"*@ />
                 <input type="submit" value="Suche" />
                 <div class="boxAddObject">@Html.ActionLink("+", "Create")</div>
             </p>
@@ -23,7 +23,7 @@
             <th>@Html.ActionLink("Name", "Index", new
                 {
                     sortOn
-                        = "FirstName",
+                        = "Name",
                     orderBy = ViewBag.OrderBy, pSortOn = ViewBag.SortOn, keyword =
                         ViewBag.Keyword
                 })
