@@ -16,6 +16,7 @@ namespace LCA_WEB.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Wert { get; set; }
         public Nullable<int> Scope { get; set; }
     
         public virtual Rohstoff Rohstoff { get; set; }

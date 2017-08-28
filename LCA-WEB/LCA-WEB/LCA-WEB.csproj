@@ -239,6 +239,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\001-draw.png" />
+    <Content Include="Images\002-delete.png" />
     <Content Include="Images\bUI_logo.png" />
     <Content Include="Images\CradleToGrave.png" />
     <Content Include="Images\LogoGBUI_dunkelBlauHG.png" />
@@ -311,6 +313,7 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

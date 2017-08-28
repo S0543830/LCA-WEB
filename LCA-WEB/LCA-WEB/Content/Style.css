@@ -12,6 +12,13 @@ html, body {
     position: relative;
 }
 
+a.draw {
+    background: url(../Images/001-draw.png) no-repeat top left;
+    display: block;
+    width: 13px;
+   
+}
+
 article,
 aside,
 details,
@@ -34,8 +41,27 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     line-height: 1.1;
 }
 
+a:link {
+    color: white;
+    text-decoration: none;
+}
 
-    .container {
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+a:active {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
     max-width: 1470px;
 }
 
@@ -62,29 +88,29 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     justify-content: center;
 }
 
-    #startSiteDivRight > div > h2 {
-        text-align: center;
-        color: #917197;
-    }
+#startSiteDivRight > div > h2 {
+    text-align: center;
+    color: #917197;
+}
 
 #logo {
     float: left;
     margin-top: 5px;
     margin-left: 30px;
-    vertical-align:middle;
+    vertical-align: middle;
     width: 60px;
 }
 
 .navbar {
     position: fixed;
-    top:0;
-    width:100%;
+    top: 0;
+    width: 100%;
     background-color: #282952;
     /* ReSharper disable once InvalidValue */
     border-color: none;
-    -ms-border-radius:0px;
-    border-radius:0px;
-    margin:0px;
+    -ms-border-radius: 0px;
+    border-radius: 0px;
+    margin: 0px;
 }
 
 .navbar ul {
@@ -92,37 +118,56 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin: 0;
     padding: 0;
     /*overflow: hidden;*/
-    margin-top:42px;
+    margin-top: 42px;
     /*margin-right: 65%;*/
-    height:45px;
-    }
+    height: 45px;
+}
 
-    .navbar li {
-        float: right;
-        margin-left: 65px;
-        vertical-align: bottom;
-    }
+.navbar li {
+    float: right;
+    margin-left: 65px;
+    vertical-align: bottom;
+}
 
 .navbar li a {
-     display: block;
-     color: white;
-     text-align: center;
-     padding: 14px 16px;
-     text-decoration: none;
-    }
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
 
 .navbar li a:hover {
-        border-style: solid;
-        border-width: 1px;
-        border-color: #cbcb3d;
-    } 
- 
- 
- .btn-default {
-        color: #fff;
-        background-color: #282c2b;
-        border: none;
-    }
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cbcb3d;
+}
+
+
+.btn-default, #btn-link {
+    color: #fff;
+    background-color: #282c2b;
+    border: none;
+    align-items: center;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0px;
+    display: table-cell;
+    font-size: 13px;
+    height: 26px;
+    padding-left:5px;
+    padding-right:5px;
+}
+
+.btn-default:hover,
+#btn-link:hover {
+    border-style: solid;
+    border-width: 1.5px;
+    background-color: #282c2b;
+    border-color: #cbcb3d;
+    color: white;
+    text-decoration: none;
+}
 
 .headlineBox {
     width: 100%;
@@ -130,13 +175,13 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     /* ReSharper disable once InvalidValue */
     border-color: none;
     height: 25px;
-    text-align:center;
-    margin:0px;
-    padding-top:2.5px;
+    text-align: center;
+    margin: 0px;
+    padding-top: 2.5px;
 }
 
 #logoBUI {
-    width:15px;
+    width: 15px;
 }
 
 footer {
@@ -152,7 +197,6 @@ footer {
     border-color: none;
     border-radius: 0px;
     margin: 0px;
-
 }
 
 footer ul {
@@ -162,21 +206,20 @@ footer ul {
     overflow: hidden;
 }
 
-    footer li {
-        float: left;
-        margin-left: 10px;
-        vertical-align: bottom;
-        color: white;
-        display: block;
-        text-align: center;
-        padding: 3px 16px;
-        text-decoration: none;
-    }
+footer li {
+    float: left;
+    margin-left: 10px;
+    vertical-align: bottom;
+    color: white;
+    display: block;
+    text-align: center;
+    padding: 3px 16px;
+    text-decoration: none;
+}
 
-        footer li a {
-            color: white;
-
-        }
+footer li a {
+    color: white;
+}
 
 .bodyContainer {
     margin: 125px 30px auto;
@@ -184,13 +227,12 @@ footer ul {
 }
 
 .textblock {
-    text-align:center;
+    text-align: center;
 }
 
 #centeredBox {
-    align-items:center;
-    vertical-align:central;
-
+    align-items: center;
+    vertical-align: central;
 }
 
 #content-centered {
@@ -208,50 +250,167 @@ footer ul {
     display: inline-block;
     margin-left: -10px;
     vertical-align: middle;
-    font-size:smaller;
+    font-size: smaller;
 }
 
 #content-centered > img {
-        vertical-align: middle;
-        border: 0 none;
-        width: 550px;
-    }
-
-.boxAddObject {
-    width: 50px;
-    height: 50px;
-    background-color: #282c2b;
-    color: white;
-    border: none;
-    align-items: center;
     vertical-align: middle;
-    text-align: center;
-    margin: 0px;
-    display: table-cell;
-    font-size: 20px;
+    border: 0 none;
+    width: 550px;
 }
-    .boxAddObject:hover {
-        border-style: solid;
-        border-width: 2px;
-        border-color: #cbcb3d;
-    } 
-.listObjectChoice {
+
+
+
+.ObjectContent {
+    margin: 140px 40px auto;
+}
+
+#icon {
+    width: 13px;
+}
+
+.tableObjectlist {
     width: 90%;
-    height: auto;
+    border: none;
+    border-collapse: separate;
+    border-spacing: 5px;
+    font-size: 14px;
+    margin: 0px;
+}
+
+
+.listObjectChoice {
     background-color: #282c2b;
     color: white;
-    border: none;
-    margin: 2px;
-    font-size: 20px;
+}
+
+.listObjectChoicekurz {
+    background-color: #282c2b;
+    color: white;
+    width: 50px;
+}
+
+.listObjectChoice:hover {
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: #cbcb3d;
+    text-decoration: none;
+    color: white;
+}
+
+.listObjectChoice:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.horizontalBar {
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+    height: 95px;
+}
+
+.horizontalBarItems {
+    float: left;
+    vertical-align: bottom;
+    margin-right:30px;
+}
+
+.horizontalBarItems a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.form-horizontal-group {
+    position: relative;
+}
+
+.label-form-create {
+    position: relative;
+    float: left;
+}
+
+hr.style13 {
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+
+hr.style3 {
+    border-top: 1px dashed #8c8b8b;
 }
 
 
-    .listObjectChoice:hover {
-        border-style: solid;
-        border-width: 3px;
-        border-color: #cbcb3d;
-    } 
-
-.ObjectBoxes {
-    margin:140px 40px auto;
+.input-form-create:-moz-placeholder {
+    color: #999999;
 }
+
+.input-form-create::-moz-placeholder {
+    color: #999999;
+}
+
+.input-form-create:-ms-input-placeholder {
+    color: #999999;
+}
+
+.input-form-create::-webkit-input-placeholder {
+    color: #999999;
+}
+
+.input-form-create {
+    display: block;
+    width: 20%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.input-form-create:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.input-form-create[disabled],
+.input-form-create[readonly],
+fieldset[disabled] .form-control {
+    cursor: not-allowed;
+    background-color: #eeeeee;
+}
+
+textarea.input-form-create {
+    height: auto;
+}
+
+
+.pagedList {
+    color: #282952;
+}
+/*select -internal-list-box {
+    -webkit-appearance: none;
+    align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    vertical-align: text-bottom;
+    user-select: none;
+    white-space: nowrap;
+    border-width: 1px;
+    border-style: inset;
+    border-color: grey;
+    border-image: initial;
+    border-radius: initial;
+}*/
+ 

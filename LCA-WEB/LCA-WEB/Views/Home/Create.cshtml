@@ -1,35 +1,131 @@
-﻿@model LCA_WEB.Models.Produkt
+﻿@using Microsoft.Ajax.Utilities
+@model LCA_WEB.Models.Produkt
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Objekt erstellen";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
 
+@{
+    List<SelectListItem> listElements = new List<SelectListItem>();
+}
+@{
+    List<SelectListItem> selectListUmweltIndikator = new List<SelectListItem>();
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
+
     <div class="form-horizontal">
+        <h2>Allgemeines zum Objekt</h2>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table id="tb_0">
+            <tr>
+                <th>Beschreibung:</th>
+                <th>Produkttyp:</th>
+                <th>Gesamtgewicht:</th>
+                <th>Nutzungsdauer:</th>
+            </tr>
+            <tr class="center-block">
+                <td>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "col-md-10" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @if(Model != null)
+                    {
+                        foreach (var elements in Model.ProduktTyp.Typen)
+                         {
+                             listElements.Add(new SelectListItem {Value = elements.Value , Text = elements.Text});
+                         }
+                    }
+                    @Html.DropDownListFor(model => model.ProduktTyp, listElements, new {htmlAttributes = new {@class = "col-md-10"}})
+                    
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Gesamtgewicht, new { htmlAttributes = new { @class = "col-md-10" } })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Nutzungsdauer_in_Jahre, new { htmlAttributes = new { @class = "col-md-10" } })
+                </td>
+            </tr>
+        </table>
         <hr/>
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class ="control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <h2>Rohstoffe des Objektes</h2>
+        <table id="tb_1">
+            <tr>
+                <th>Beschreibung:</th>
+                <th>Menge:</th>
+                <th>Einheit:</th>
+                <th>Umweltindikator:</th>
+                <th>Umweltindikator Wert:</th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.EditorFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count-1).Rohstoff.Name, new { htmlAttributes = new { @class = "col-md-10" } })
+                    @Html.ValidationMessageFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Name, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Menge_in_t, new { htmlAttributes = new { @class = "col-md-10" } })
+                    @Html.ValidationMessageFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Menge_in_t, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    <select>
+                        <option>g</option>
+                        <option>kg</option>
+                        <option>t</option>
+                        <option>kWh</option>
+                    </select>
+                </td>
+                <td>
+                    @if(Model != null)
+                    {
+                        foreach (var elements in Model.ProduktRohstoffUmweltindikators.ElementAt(Model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Umweltindikator.Name)
+                        {
+                            selectListUmweltIndikator.Add(new SelectListItem {Value = elements.ToString() , Text = elements.ToString()});
+                        }
+                    }
+                    @Html.DropDownListFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(Model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Umweltindikator, selectListUmweltIndikator, new {htmlAttributes = new {@class = "col-md-10"}}) 
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Umweltindikator.Wert, new { htmlAttributes = new { @class = "col-md-10" } })
+                    @Html.ValidationMessageFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Umweltindikator.Wert, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="2">
+                    <button id="btn_Indikator" type="button" class="btn btn-default">Indikator hinzufügen</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <button id="btn_Rohstoff" type="button" class="btn btn-default">Rohstoff hinzufügen</button>
+                </td>
+            </tr>
+        </table>
+
+        <hr/>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
+                <input type="submit" value="Eingabe speichern" class="btn btn-default"/>
             </div>
         </div>
     </div>
+
+    
+   
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Zurück zur Liste", "Index")
     </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        
+    </script>
 }
 }

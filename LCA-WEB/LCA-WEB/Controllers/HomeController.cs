@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
@@ -109,6 +110,11 @@ namespace LCA_WEB.Controllers
         }
 
         public ActionResult Create()
+        { 
+            return View();
+        }
+
+        public ActionResult Details()
         {
             return View();
         }

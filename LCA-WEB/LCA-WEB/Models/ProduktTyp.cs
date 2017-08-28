@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.Mvc;
+
 namespace LCA_WEB.Models
 {
     using System;
@@ -22,7 +24,8 @@ namespace LCA_WEB.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Typ { get; set; }
-    
+
+        public IEnumerable<SelectListItem> Typen { get; set; }
         public virtual ICollection<Produkt> Produkts { get; set; }
     }
 }
