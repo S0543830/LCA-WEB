@@ -1,0 +1,18 @@
+﻿@model LCA_WEB.Models.ProduktTypViewViewModel
+@{
+    ViewBag.Title = "Löschen von Typen eines Objektes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <h3>Sind Sie sicher folgenden Typ löschen zu wollen: @Html.DisplayFor(model => model._ProduktTyp.Name)?</h3>
+  
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <input type="submit" value="Delete" class="btn btn-default" />
+        |
+        @Html.ActionLink("Zurück", Model._View)
+    </div>
+}

@@ -1,23 +1,18 @@
-﻿@model LCA_WEB.Models.Produkt
+﻿@model LCA_WEB.Models.Produkt_Typ_Rohstoff_Indikator
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Produkt bearbeiten";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-@{
-    List<SelectListItem> listElements = new List<SelectListItem>();
-}
 @{
     List<SelectListItem> selectListUmweltIndikator = new List<SelectListItem>();
 }
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Id)
-    @Html.HiddenFor(model => model.DateOfCreation)
-    @Html.HiddenFor(model => model.CreatedBy)
+    @Html.HiddenFor(model => model._Produkt.Id)
+    @Html.HiddenFor(model => model._Produkt.DateOfCreation)
+    @Html.HiddenFor(model => model._Produkt.CreatedBy)
 
     <div class="form-horizontal">
         <h2>Allgemeines zum Objekt</h2>
@@ -31,25 +26,31 @@
             </tr>
             <tr class="center-block">
                 <td>
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "col-md-10" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model._Produkt.Name, new { htmlAttributes = new { @class = "col-md-10" } })
+                    @Html.ValidationMessageFor(model => model._Produkt.Name, "", new { @class = "text-danger" })
                 </td>
                 <td>
-                    @if(Model.ProduktTyp != null)
+                    @if (Model._Typ_Id != null)
                     {
-                        foreach (var elements in Model.ProduktTyp.Typen)
-                        {
-                            listElements.Add(new SelectListItem {Value = elements.Value , Text = elements.Text});
-                        }
+                        @Html.DropDownListFor(m => m._ProduktTyp.Id, new SelectList(Model._Typ_Id, "Id", "Name", "Typ"), "Select", new {id = "selectTyp"})
                     }
-                    @Html.DropDownListFor(model => model.ProduktTyp, listElements, new {htmlAttributes = new {@class = "col-md-10"}})
+                    else
+                    {
+                        <select>
+                            <option>Kein Typ vorhanden</option>
+                        </select>
+                    }
+                    <a> </a>
+                        <input type="button" value="+" onclick="location.href='@Url.Action("AddProduktTyp","Home", new {whichView = "Create"})' " class="btn btn-default"/>
+                        <a> </a>
+                        <input id="btndeleteTyp" type="button" value="-"  class="btn btn-default" />
                     
                 </td>
                 <td>
-                    @Html.EditorFor(model => model.Gesamtgewicht, new { htmlAttributes = new { @class = "col-md-10" } })
+                    @Html.EditorFor(model => model._Produkt.Gesamtgewicht, new { htmlAttributes = new { @class = "col-md-10" } })
                 </td>
                 <td>
-                    @Html.EditorFor(model => model.Nutzungsdauer_in_Jahre, new { htmlAttributes = new { @class = "col-md-10" } })
+                    @Html.EditorFor(model => model._Produkt.Nutzungsdauer_in_Jahre, new { htmlAttributes = new { @class = "col-md-10" } })
                 </td>
             </tr>
         </table>
@@ -65,12 +66,24 @@
             </tr>
             <tr>
                 <td>
-                    @*@Html.EditorFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count).Rohstoff.Name, new { htmlAttributes = new { @class = "col-md-10" } })
-                    @Html.ValidationMessageFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count ).Rohstoff.Name, "", new { @class = "text-danger" })*@
+                    @if (Model._Rohstoff != null)
+                    {
+                        @Html.DropDownListFor(m => m._Rohstoff.Id, new SelectList(Model._Rohstoffe, "Id", "Name"), new { id = "selectRohstoff" })
+                    }
+                    else
+                    {
+                        <select>
+                            <option>Keine Rohstoffe vorhanden</option>
+                        </select>
+                    }
+                    <a> </a>
+                    <input type="button" value="+" onclick="location.href = '@Url.Action("AddRohstoff", "Home", new {whichView = "Create"})' " class="btn btn-default"/>
+                    <a> </a>
+                    <input id="btndeleteRohstoff" type="button" value="-" class="btn btn-default"/>
                </td>
                 <td>
-                    @*@Html.EditorFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Menge_in_t, new { htmlAttributes = new { @class = "col-md-10" } })
-                    @Html.ValidationMessageFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count ).Rohstoff.Menge_in_t, "", new { @class = "text-danger" })*@
+                    @Html.EditorFor(model => model._Rohstoff.Menge_in_t, new { htmlAttributes = new { @class = "col-md-10" } })
+                    @Html.ValidationMessageFor(model => model._Rohstoff.Menge_in_t, "", new { @class = "text-danger" })
                </td>
                 <td>
                     <select>
@@ -81,18 +94,24 @@
                     </select>
                 </td>
                 <td>
-                    @if(Model.ProduktRohstoffUmweltindikators != null)
+                    @if (Model._LIndikator != null)
                     {
-                        //foreach (var elements in Model.ProduktRohstoffUmweltindikators.ElementAt(Model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Umweltindikator.Name)
-                        //{
-                        //    selectListUmweltIndikator.Add(new SelectListItem {Value = elements.ToString() , Text = elements.ToString()});
-                        //}
+                        @Html.DropDownListFor(m => m._Indikator.Id, new SelectList(Model._LIndikator, "Id", "Name"), new { id = "selectIndi" })
                     }
-                    @Html.DropDownListFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(Model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Umweltindikator, selectListUmweltIndikator, new {htmlAttributes = new {@class = "col-md-10"}}) 
+                    else
+                    {
+                        <select>
+                            <option>Keine Indikatoren vorhanden</option>
+                        </select>
+                    }
+                    <a> </a>
+                    <input type="button" value="+" onclick="location.href='@Url.Action("AddIndikator","Home", new {whichView = "Create"})' " class="btn btn-default"/>
+                    <a> </a>
+                    <input id="btndeleteIndi" type="button" value="-"  class="btn btn-default" />
                 </td>
                 <td>
-                    @*@Html.EditorFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Umweltindikator.Wert, new { htmlAttributes = new { @class = "col-md-10" } })
-                    @Html.ValidationMessageFor(model => model.ProduktRohstoffUmweltindikators.ElementAt(model.ProduktRohstoffUmweltindikators.Count - 1).Rohstoff.Umweltindikator.Wert, "", new { @class = "text-danger" })*@
+                    @Html.EditorFor(model => model._Umweltindikatorwert.Wert, new { htmlAttributes = new { @class = "col-md-10" } })
+                    @Html.ValidationMessageFor(model => model._Umweltindikatorwert.Wert, "", new { @class = "text-danger" })
                 </td>
             </tr>
             <tr>
@@ -127,7 +146,70 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        
+        $(document).ready(function() {
+                $('#btndeleteTyp').click(function(event) {
+                    var e = document.getElementById('selectTyp');
+                    var slc = e.options[e.selectedIndex].value;
+                    location.href = '@Html.Raw(Url.Action("DeleteProduktTyp","Home"))' +
+                        '?name=' +
+                        slc +
+                        '&_whichView=Create';
+                });
+            }
+        );
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+                $('#btnErstellen').click(function(event) {
+                    var typ = document.getElementById('selectTyp');
+                    var rohstoff = document.getElementById('selectRohstoff');
+                    var indi = document.getElementById('selectIndi');
+                    var slctyp = typ.options[typ.selectedIndex].value;
+                    var slcroh = rohstoff.options[rohstoff.selectedIndex].value;
+                    var slcindi = indi.options[indi.selectedIndex].value;
+                    $.post('@Url.Action("Create","Home",FormMethod.Post)',
+                        {
+                            typ: slctyp,
+                            roh: slcroh,
+                            indi: slcindi
+                        },
+                        function(data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    );
+                });
+            }
+        )
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+                $('#btndeleteRohstoff').click(function(event) {
+                    var e = document.getElementById('selectRohstoff');
+                    var slc = e.options[e.selectedIndex].value;
+                    location.href = '@Html.Raw(Url.Action("DeleteRohstoff","Home"))' +
+                        '?name=' +
+                        slc +
+                        '&roh=Create';
+                });
+            }
+        )
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+                $('#btndeleteIndi').click(function(event) {
+                    var e = document.getElementById('selectIndi');
+                    var slc = e.options[e.selectedIndex].value;
+                    location.href = '@Html.Raw(Url.Action("DeleteIndikator", "Home"))' +
+                        '?name=' +
+                        slc +
+                        '&indi=Create';
+                });
+            }
+        )
+
     </script>
 }
 }

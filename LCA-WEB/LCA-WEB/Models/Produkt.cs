@@ -14,8 +14,10 @@ namespace LCA_WEB.Models
     
     public partial class Produkt
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Produkt()
         {
+            this.EndOfLifeDatas = new HashSet<EndOfLifeData>();
             this.ProduktRohstoffUmweltindikators = new HashSet<ProduktRohstoffUmweltindikator>();
         }
     
@@ -33,8 +35,12 @@ namespace LCA_WEB.Models
         public Nullable<double> Energieverbrauch_in_GJ { get; set; }
         public Nullable<double> CO2_Ausstoss_t_a { get; set; }
         public Nullable<double> Energiekosten_pro_GJ { get; set; }
+        public Nullable<int> Rohstoff_Id { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EndOfLifeData> EndOfLifeDatas { get; set; }
         public virtual ProduktTyp ProduktTyp { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProduktRohstoffUmweltindikator> ProduktRohstoffUmweltindikators { get; set; }
     }
 }

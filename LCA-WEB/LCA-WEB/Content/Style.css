@@ -143,11 +143,16 @@ a:active {
     border-color: #cbcb3d;
 }
 
-
+table, td, th {
+    border: 1px solid black;
+}
 .btn-default, #btn-link {
     color: #fff;
     background-color: #282c2b;
     border: none;
+    -ms-align-items: center;
+    -o-align-items: center;
+    -webkit-align-items: center;
     align-items: center;
     vertical-align: middle;
     text-align: center;

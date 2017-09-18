@@ -7,71 +7,58 @@
 @{
     ViewBag.Title = "Objekt auswählen oder hinzufügen";
 }
-<div class="ObjectBoxes">
-    <fieldset>
-        @using (Html.BeginForm())
-        {
+@using (Html.BeginForm())
+{
+    <div class="ObjectBoxes">
+        <fieldset>
             <div class="horizontalBar">
-                <input type="text" name="keyword" @*required value="@ViewBag.Keyword"*@ />
+                <input type="text" name="keyword" @*required value="@ViewBag.Keyword"*@/>
                 <a> </a>
-                <input class="btn-default" type="submit" value="Suche" />
+                <input class="btn-default" type="submit" value="Suche"/>
                 <div class="horizontalBarItems">
                     <p id="btn-link">@Html.ActionLink(" + Objekt hinzufügen", "Create")</p>
                 </div>
             </div>
-        }
-    </fieldset>
-    @*<table class="tableObjectlist">
-    <tr 
-        >
-        <td class="listObjectChoice">
-            @Html.ActionLink("Hier ist das Element 1", "Details"@*, new { id = item.Id })
-        </td>
-        <td>
-            <a href='@Url.Action("Edit", "Home")'>
-                <img id="icon" src='@Url.Content("../Images/001-draw.png")' />
-            </a>
-            <a href='@Url.Action("Delete", "Home")'>
-                <img id="icon" src='@Url.Content("../Images/002-delete.png")' />
-            </a>
-        </td>
-    </tr>
-        </table>*@
-    <table class="tableObjectlist">
-        <tr>
-            <th>@Html.ActionLink("Name", "Index", new
-                {
-                    sortOn
-                        = "Name",
-                    orderBy = ViewBag.OrderBy, pSortOn = ViewBag.SortOn, keyword =
-                        ViewBag.Keyword
-                })
-            </th>
-        </tr>
-                @foreach (var item in Model)
-                {
-                        <tr class="listObjectChoice">
-                        <td>
-                            <a href='@Url.Action("Details", "Home",new {id = item.Id})'>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </a>
-                        </td>
-                            <td class="listObjectChoicekurz">
-                                <a href='@Url.Action("Edit", "Home", new {id = item.Id})'>
-                                    <img id="icon" src='@Url.Content("../Images/001-draw.png")'/>
-                                </a>|
-                                <a href='@Url.Action("Delete", "Home", new {id = item.Id})'>
-                                    <img id="icon" src='@Url.Content("../Images/002-delete.png")'/>
-                                </a>
-                            </td>
-                        </tr>
-                        
-                    }
-</table>
-</div>
-<div class="pagedList">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new
-    { page, sortOn = ViewBag.SortOn, orderBy = ViewBag.OrderBy, pSortOn =
-        ViewBag.SortOn, keyword = ViewBag.Keyword }),
-        PagedListRenderOptions.ClassicPlusFirstAndLast)
-</div>
+        </fieldset>
+        <table class="tableObjectlist">
+            <tr>
+                <th>@Html.ActionLink("Name", "Index", new
+                    {
+                        sortOn
+                            = "Name",
+                        orderBy = ViewBag.OrderBy, pSortOn = ViewBag.SortOn, keyword =
+                            ViewBag.Keyword
+                    })
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="listObjectChoice">
+                    <td>
+                        <a href='@Url.Action("Details", "Home", new {id = item.Id})'>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </a>
+                    </td>
+                    <td class="listObjectChoicekurz">
+                        <a onclick="" href='@Url.Action("Edit", "Home", new {id = item.Id})'>
+                            <img id="icon" src='@Url.Content("../Images/001-draw.png")'/>
+                        </a>|
+                        <a href='@Url.Action("Delete", "Home", new {id = item.Id})'>
+                            <img id="icon" src='@Url.Content("../Images/002-delete.png")'/>
+                        </a>
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+    <div class="pagedList">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new
+        {
+            page, sortOn = ViewBag.SortOn, orderBy = ViewBag.OrderBy, pSortOn =
+                ViewBag.SortOn,
+            keyword = ViewBag.Keyword
+        }),
+            PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </div>
+}

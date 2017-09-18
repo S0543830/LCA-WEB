@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d3944003db1d421bba57f0358a34b689" Name="Diagram1">
+        <EntityTypeShape EntityType="NewmModelDB.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.AspNetRole" Width="1.5" PointX="7.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.AspNetUserClaim" Width="1.5" PointX="12.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.AspNetUserLogin" Width="1.5" PointX="12.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.AspNetUser" Width="1.5" PointX="10" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.Produkt" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.ProduktTyp" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.Rohstoff" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.Rohstoffe" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.Umweltindikator" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.Umweltindikatorwert" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.EndOfLifeData" Width="1.5" PointX="7.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewmModelDB.ProduktRohstoffUmweltindikator" Width="1.5" PointX="10.5" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="NewmModelDB.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="NewmModelDB.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="NewmModelDB.FK_dbo_EndOfLifeData_Produkt_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="NewmModelDB.FK_dbo_Produkt_Typ_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="NewmModelDB.FK_dbo_ProduktRohstoffUmweltindikator_Produkt_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="NewmModelDB.FK_dbo_EndOfLifeData_Rohstoff_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="NewmModelDB.FK_dbo_ProduktRohstoffUmweltindikator_Rohstoff_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="NewmModelDB.FK_dbo_Rohstoff_Name" ManuallyRouted="false" />
+        <AssociationConnector Association="NewmModelDB.FK_dbo_Rohstoff_Umweltindikator_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="NewmModelDB.FK_dbo_Umweltindikatorwert_Umweltindikator_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="NewmModelDB.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,17 @@
+﻿@model LCA_WEB.Models.IndikatorViewViewModel
+@{
+    ViewBag.Title = "Löschen eines Umweltindikators";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <h3>Sind Sie sicher folgenden Typ löschen zu wollen: @Html.DisplayFor(model => model._Umweltindikator.Name)?</h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <input type="submit" value="Delete" class="btn btn-default"  />
+        |
+        @Html.ActionLink("Back to List", Model._View)
+    </div>
+}
