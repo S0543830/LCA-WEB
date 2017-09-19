@@ -32,7 +32,7 @@
                 <td>
                     @if (Model._Typ_Id != null)
                     {
-                        @Html.DropDownListFor(m => m._ProduktTyp.Id, new SelectList(Model._Typ_Id, "Id", "Name", "Typ"), "Select", new {id = "selectTyp"})
+                        @Html.DropDownListFor(m => m._ProduktTyp.Id, new SelectList(Model._Typ_Id, "Id", "Name", "Typ"), new {id = "selectTyp"})
                     }
                     else
                     {
@@ -66,7 +66,7 @@
             </tr>
             <tr>
                 <td>
-                    @if (Model._Rohstoff != null)
+                    @if (Model._Rohstoffe != null)
                     {
                         @Html.DropDownListFor(m => m._Rohstoff.Id, new SelectList(Model._Rohstoffe, "Id", "Name"), new { id = "selectRohstoff" })
                     }

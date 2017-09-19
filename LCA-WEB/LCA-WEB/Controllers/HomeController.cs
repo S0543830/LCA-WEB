@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
@@ -175,7 +176,8 @@ namespace LCA_WEB.Controllers
             return HttpNotFound();
         }
 
-        [HttpGet]
+        
+        [HttpGet()]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -255,7 +257,7 @@ namespace LCA_WEB.Controllers
 
 
 
-
+        [HttpGet()]
         public ActionResult Details()
         {
             return View();
@@ -468,7 +470,7 @@ namespace LCA_WEB.Controllers
 
 
        
-
+        [HttpGet()]
         public ActionResult Delete(int? id)
         {
             if (id == null)

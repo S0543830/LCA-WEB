@@ -14,6 +14,12 @@ namespace LCA_WEB
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Delete",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Delete", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "addProdukt",
                 url: "{controller}/{action}/{typ}/{roh}/{indi}",
                 defaults: new { controller = "Home", action = "Create", id = UrlParameter.Optional }
@@ -31,11 +37,11 @@ namespace LCA_WEB
                 defaults: new { controller = "Home", action = "AddRohstoff", id = UrlParameter.Optional }
             );
 
-            //routes.MapRoute(
-            //    name: "Edit",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Home", action = "Edit", id = UrlParameter.Optional }
-            //);
+            routes.MapRoute(
+                name: "edit",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Edit", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "AddIndi",

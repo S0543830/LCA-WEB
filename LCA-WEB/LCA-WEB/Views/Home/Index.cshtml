@@ -22,13 +22,13 @@
         </fieldset>
         <table class="tableObjectlist">
             <tr>
-                <th>@Html.ActionLink("Name", "Index", new
+                <th >@Html.ActionLink("Name", "Index", new
                     {
                         sortOn
                             = "Name",
                         orderBy = ViewBag.OrderBy, pSortOn = ViewBag.SortOn, keyword =
                             ViewBag.Keyword
-                    })
+                    },new {})
                 </th>
             </tr>
             @foreach (var item in Model)
@@ -40,7 +40,7 @@
                         </a>
                     </td>
                     <td class="listObjectChoicekurz">
-                        <a onclick="" href='@Url.Action("Edit", "Home", new {id = item.Id})'>
+                        <a href='@Url.Action("Edit","Home", new {id = item.Id})'>
                             <img id="icon" src='@Url.Content("../Images/001-draw.png")'/>
                         </a>|
                         <a href='@Url.Action("Delete", "Home", new {id = item.Id})'>
