@@ -14,18 +14,12 @@ namespace LCA_WEB.Models
     
     public partial class Umweltindikatorwert
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Umweltindikatorwert()
-        {
-            this.Rohstoffs = new HashSet<Rohstoff>();
-        }
-    
         public int Id { get; set; }
         public int Umweltindikator_Id { get; set; }
         public Nullable<int> Wert { get; set; }
+        public Nullable<int> Rohstoff_Id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rohstoff> Rohstoffs { get; set; }
+        public virtual Rohstoff Rohstoff { get; set; }
         public virtual Umweltindikator Umweltindikator { get; set; }
     }
 }

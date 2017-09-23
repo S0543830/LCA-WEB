@@ -1,4 +1,6 @@
-﻿@using PagedList;
+﻿
+<style type="text/css"></style>
+@using PagedList;
 @using PagedList.Mvc;
 @model IPagedList<LCA_WEB.Models.Produkt>
 @{
@@ -9,7 +11,7 @@
 }
 @using (Html.BeginForm())
 {
-    <div class="ObjectBoxes">
+    <div>
         <fieldset>
             <div class="horizontalBar">
                 <input type="text" name="keyword" @*required value="@ViewBag.Keyword"*@/>

@@ -192,19 +192,19 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbLCAWebDasRichtige.Context.cs">
       <AutoGen>True</AutoGen>
@@ -236,6 +236,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbNew.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbWeb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbWeb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbWeb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbWeb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbWeb.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\DbWebLca.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -252,30 +267,30 @@
       <DependentUpon>DbWebLca.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\EndOfLifeData.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Produkt.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProduktRohstoffUmweltindikator.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProduktTyp.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Produkt_Typ_Rohstoff_Indikator.cs" />
     <Compile Include="Models\Rohstoff.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rohstoffe.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Umweltindikator.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Umweltindikatorwert.cs">
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -317,6 +332,16 @@
       <DependentUpon>DbNew.edmx</DependentUpon>
       <LastGenOutput>DbNew.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\DbWeb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbWeb.edmx</DependentUpon>
+      <LastGenOutput>DbWeb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DbWeb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbWeb.edmx</DependentUpon>
+      <LastGenOutput>DbWeb.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\DbWebLca.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DbWebLca.edmx</DependentUpon>
@@ -349,6 +374,13 @@
     </EntityDeploy>
     <Content Include="Models\DbWebLca.edmx.diagram">
       <DependentUpon>DbWebLca.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DbWeb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbWeb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DbWeb.edmx.diagram">
+      <DependentUpon>DbWeb.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

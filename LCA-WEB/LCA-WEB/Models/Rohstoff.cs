@@ -19,18 +19,21 @@ namespace LCA_WEB.Models
         {
             this.EndOfLifeDatas = new HashSet<EndOfLifeData>();
             this.ProduktRohstoffUmweltindikators = new HashSet<ProduktRohstoffUmweltindikator>();
+            this.Umweltindikatorwerts = new HashSet<Umweltindikatorwert>();
         }
     
         public int Id { get; set; }
         public int Rohstoff_Id { get; set; }
         public Nullable<decimal> Menge_in_t { get; set; }
-        public int Umweltindikator_Id { get; set; }
+        public Nullable<int> Produkt_Id { get; set; }
     
+        public virtual Produkt Produkt { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EndOfLifeData> EndOfLifeDatas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProduktRohstoffUmweltindikator> ProduktRohstoffUmweltindikators { get; set; }
         public virtual Rohstoffe Rohstoffe { get; set; }
-        public virtual Umweltindikatorwert Umweltindikatorwert { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Umweltindikatorwert> Umweltindikatorwerts { get; set; }
     }
 }

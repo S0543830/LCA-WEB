@@ -4,9 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{
-    List<SelectListItem> selectListUmweltIndikator = new List<SelectListItem>();
-}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -41,9 +38,9 @@
                         </select>
                     }
                     <a> </a>
-                        <input type="button" value="+" onclick="location.href='@Url.Action("AddProduktTyp","Home", new {whichView = "Create"})' " class="btn btn-default"/>
+                        <input type="button" value="+" onclick="location.href='@Url.Action("AddProduktTyp","Home", new {whichView = "Edit/"+Model._Produkt.Id})' " class="btn btn-default"/>
                         <a> </a>
-                        <input id="btndeleteTyp" type="button" value="-"  class="btn btn-default" />
+                        <input id="btndeleteTeyp" onclick="deleteTyp('Edit/'+@Model._Produkt.Id)" type="button" value="-"  class="btn btn-default" />
                     
                 </td>
                 <td>
@@ -77,9 +74,9 @@
                         </select>
                     }
                     <a> </a>
-                    <input type="button" value="+" onclick="location.href = '@Url.Action("AddRohstoff", "Home", new {whichView = "Create"})' " class="btn btn-default"/>
+                    <input type="button" value="+" onclick="location.href = '@Url.Action("AddRohstoff", "Home", new {whichView = "Edit/" +Model._Produkt.Id})' " class="btn btn-default"/>
                     <a> </a>
-                    <input id="btndeleteRohstoff" type="button" value="-" class="btn btn-default"/>
+                    <input id="btndeleteRohstoff" onclick="deleteRoh('Edit/'+@Model._Produkt.Id)" type="button" value="-" class="btn btn-default"/>
                </td>
                 <td>
                     @Html.EditorFor(model => model._Rohstoff.Menge_in_t, new { htmlAttributes = new { @class = "col-md-10" } })
@@ -105,9 +102,9 @@
                         </select>
                     }
                     <a> </a>
-                    <input type="button" value="+" onclick="location.href='@Url.Action("AddIndikator","Home", new {whichView = "Create"})' " class="btn btn-default"/>
+                    <input type="button" value="+" onclick="location.href='@Url.Action("AddIndikator","Home", new {whichView = "Edit/"+Model._Produkt.Id})' " class="btn btn-default"/>
                     <a> </a>
-                    <input id="btndeleteIndi" type="button" value="-"  class="btn btn-default" />
+                    <input id="btndeleteIndi" type="button" onclick="deleteIndi('Edit/'+@Model._Produkt.Id)" value="-"  class="btn btn-default" />
                 </td>
                 <td>
                     @Html.EditorFor(model => model._Umweltindikatorwert.Wert, new { htmlAttributes = new { @class = "col-md-10" } })
@@ -146,29 +143,29 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $(document).ready(function() {
-                $('#btndeleteTyp').click(function(event) {
-                    var e = document.getElementById('selectTyp');
-                    var slc = e.options[e.selectedIndex].value;
-                    location.href = '@Html.Raw(Url.Action("DeleteProduktTyp","Home"))' +
-                        '?name=' +
-                        slc +
-                        '&_whichView=Create';
-                });
-            }
-        );
-
+        function deleteTyp(view)
+        {
+           var e = document.getElementById('selectTyp');
+           var slc = e.options[e.selectedIndex].value;
+           location.href = '@Html.Raw(Url.Action("DeleteProduktTyp", "Home"))' +
+                '?name=' +
+                    slc +
+                    '&_whichView=' +
+                    view;
+         };
+        
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-                $('#btnErstellen').click(function(event) {
+                $('#btnErstellen').click(function() {
                     var typ = document.getElementById('selectTyp');
                     var rohstoff = document.getElementById('selectRohstoff');
                     var indi = document.getElementById('selectIndi');
                     var slctyp = typ.options[typ.selectedIndex].value;
                     var slcroh = rohstoff.options[rohstoff.selectedIndex].value;
                     var slcindi = indi.options[indi.selectedIndex].value;
-                    $.post('@Url.Action("Create","Home",FormMethod.Post)',
+                    alert(typ);
+                    $.post('@Url.Action("Edit", "Home", FormMethod.Post)',
                         {
                             typ: slctyp,
                             roh: slcroh,
@@ -183,32 +180,27 @@
         )
 
     </script>
+
     <script type="text/javascript">
-        $(document).ready(function() {
-                $('#btndeleteRohstoff').click(function(event) {
+       function deleteRoh(view) {
                     var e = document.getElementById('selectRohstoff');
                     var slc = e.options[e.selectedIndex].value;
-                    location.href = '@Html.Raw(Url.Action("DeleteRohstoff","Home"))' +
+                    location.href = '@Html.Raw(Url.Action("DeleteRohstoff", "Home"))' +
                         '?name=' +
                         slc +
-                        '&roh=Create';
-                });
-            }
-        )
-
+                        '&roh='+view;
+                };
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
-                $('#btndeleteIndi').click(function(event) {
+      function deleteIndi(view) {
                     var e = document.getElementById('selectIndi');
                     var slc = e.options[e.selectedIndex].value;
                     location.href = '@Html.Raw(Url.Action("DeleteIndikator", "Home"))' +
                         '?name=' +
                         slc +
-                        '&indi=Create';
-                });
-            }
-        )
+                        '&indi='+ view;
+                };
+            
 
     </script>
 }

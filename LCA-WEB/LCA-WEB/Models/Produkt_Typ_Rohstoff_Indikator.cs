@@ -19,8 +19,23 @@ namespace LCA_WEB.Models
         public Umweltindikator _Indikator { get; set; }
         public EndOfLifeData _EndOfLifeData { get; set; }
         public Umweltindikatorwert _Umweltindikatorwert { get; set; }
+        public int _RowRohstoff { get; set; }
+        public int _RowIndikator { get; set; }
+        public List<ProduktRohstoff> ProduktRohstoff { get; set; }
     }
+
+    public class ProduktRohstoff
+    {
+        public Rohstoff Rohstoff { get; set; }
+        public List<Umweltindikatorwert> LRohstoffe { get; set; }
+    }
+
     
+
+    public class RohstoffIndikatorBeziehung
+    {
+        public int AnzahlIndikatorProRohstoff { get; set; }
+    }
 
     public class ProduktTypViewViewModel
     {

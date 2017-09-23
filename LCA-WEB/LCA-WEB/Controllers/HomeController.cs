@@ -14,7 +14,8 @@ namespace LCA_WEB.Controllers
     public class HomeController : Controller
     {
 
-        private  DbWebLcaEntities _db = new DbWebLcaEntities();
+        private DbWebEntities _db = new DbWebEntities();
+
         public ActionResult Index(string sortOn, string orderBy,
             string pSortOn, string keyword, int? page)
         {
@@ -78,9 +79,9 @@ namespace LCA_WEB.Controllers
             //{
             //    return RedirectToAction("Login", "Account");
             //}
-            
+
         }
-        
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -105,95 +106,246 @@ namespace LCA_WEB.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Create()
+        public void AddIn(Produkt_Typ_Rohstoff_Indikator _produktTypRohstoffIndikator = null,
+            int indiAtRoh = 0, string whichOne = "")
+
         {
+            var assa = 0;
+        }
+
+        [HttpGet]
+        public ActionResult Create(Produkt_Typ_Rohstoff_Indikator _produktTypRohstoffIndikator = null, int indiAtRoh = 0, string whichOne ="")
+        {
+            RohstoffIndikatorBeziehung tmp = new RohstoffIndikatorBeziehung();
             
-            Produkt_Typ_Rohstoff_Indikator viewModel = new Produkt_Typ_Rohstoff_Indikator
+            
+            Produkt_Typ_Rohstoff_Indikator viewModel = new Produkt_Typ_Rohstoff_Indikator();
+            if (whichOne == "roh")
             {
-                _Typ_Id = _db.ProduktTyps.ToList(),
-                _LIndikator = _db.Umweltindikators.ToList(),
-                _Rohstoffe = _db.Rohstoffes.ToList(),
-            };
+                tmp.AnzahlIndikatorProRohstoff = 1;
+                if (_produktTypRohstoffIndikator != null )
+                {
+                    
+                        ProduktRohstoff produkt = new ProduktRohstoff();
+                        produkt.LRohstoffe = new List<Umweltindikatorwert>();
+                        produkt.Rohstoff = new Rohstoff();
+                        produkt.LRohstoffe.Add(new Umweltindikatorwert());
+                        _produktTypRohstoffIndikator.ProduktRohstoff.Add(produkt);
+                        
+                    
+                    viewModel = new Produkt_Typ_Rohstoff_Indikator
+                    {
+                        _Typ_Id = _db.ProduktTyps.ToList(),
+                        _LIndikator = _db.Umweltindikators.ToList(),
+                        _Rohstoffe = _db.Rohstoffes.ToList(),
+                        ProduktRohstoff = _produktTypRohstoffIndikator.ProduktRohstoff
+                    };
+                }
+            }
+            else if (whichOne == "indi")
+            {
+                if (_produktTypRohstoffIndikator != null && _produktTypRohstoffIndikator.ProduktRohstoff != null)
+                {
+                    for (int i = 0; i < _produktTypRohstoffIndikator.ProduktRohstoff.Count; i++)
+                    {
+                        if (i == indiAtRoh)
+                        {
+                            _produktTypRohstoffIndikator.ProduktRohstoff.ElementAt(i).LRohstoffe.Add(new Umweltindikatorwert());
+                        }
+                    }
+                    viewModel = new Produkt_Typ_Rohstoff_Indikator
+                    {
+                        _Typ_Id = _db.ProduktTyps.ToList(),
+                        _LIndikator = _db.Umweltindikators.ToList(),
+                        _Rohstoffe = _db.Rohstoffes.ToList(),
+                        ProduktRohstoff = _produktTypRohstoffIndikator.ProduktRohstoff
+                    };
+                }
+            }
+            else
+            {
+                ProduktRohstoff produktRohstoff = new ProduktRohstoff();
+                produktRohstoff.LRohstoffe = new List<Umweltindikatorwert>();
+                produktRohstoff.LRohstoffe.Add(new Umweltindikatorwert());
+                if (_produktTypRohstoffIndikator != null)
+                {
+                    _produktTypRohstoffIndikator.ProduktRohstoff = new List<ProduktRohstoff>();
+                    _produktTypRohstoffIndikator.ProduktRohstoff.Add(produktRohstoff);
+                    viewModel = new Produkt_Typ_Rohstoff_Indikator
+                    {
+                        _Typ_Id = _db.ProduktTyps.ToList(),
+                        _LIndikator = _db.Umweltindikators.ToList(),
+                        _Rohstoffe = _db.Rohstoffes.ToList(),
+                        ProduktRohstoff = _produktTypRohstoffIndikator.ProduktRohstoff
+                    };
+                }
+            }
+           
             return View(viewModel);
         }
 
         [HttpPost,ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateConfirmed(Produkt_Typ_Rohstoff_Indikator _produktDetails)
+        public ActionResult CreateConfirmed(Produkt_Typ_Rohstoff_Indikator _produktDetails, List<double> list, int indiAtRoh = 0, string whichOne = "")
         {
-            try
+            RohstoffIndikatorBeziehung tmp = new RohstoffIndikatorBeziehung();
+
+
+            Produkt_Typ_Rohstoff_Indikator viewModel = new Produkt_Typ_Rohstoff_Indikator();
+            if (whichOne == "roh")
             {
-                if (ModelState.IsValid)
+                tmp.AnzahlIndikatorProRohstoff = 1;
+                if (_produktDetails != null)
                 {
-                    _produktDetails._Produkt.DateOfChanging = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-                    _produktDetails._Produkt.DateOfCreation = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-                    _produktDetails._Produkt.CreatedBy = Request.IsAuthenticated ? User.Identity.GetUserName() : "Besucher";
-                    _produktDetails._Produkt.ChangedBy = Request.IsAuthenticated ? User.Identity.GetUserName() : "Besucher";
 
-                    //Indikator speichern
-                    var indi = from a in _db.Umweltindikators where a.Id == _produktDetails._Indikator.Id select a.Id;
-                    _produktDetails._Umweltindikatorwert.Umweltindikator_Id = indi.FirstOrDefault();
-                    _produktDetails._Umweltindikatorwert.Wert = _produktDetails._Umweltindikatorwert.Wert;
-                    _db.Umweltindikatorwerts.Add(_produktDetails._Umweltindikatorwert);
-                    _db.SaveChanges();
-                    var idindi = from a in _db.Umweltindikatorwerts
-                        where (a.Umweltindikator_Id == indi.FirstOrDefault() ) && (a.Wert == _produktDetails._Umweltindikatorwert.Wert)
-                        select a.Id;
-                    //Indikator speichern
+                    ProduktRohstoff produkt = new ProduktRohstoff();
+                    produkt.LRohstoffe = new List<Umweltindikatorwert>();
+                    produkt.Rohstoff = new Rohstoff();
+                    produkt.LRohstoffe.Add(new Umweltindikatorwert());
+                    _produktDetails.ProduktRohstoff.Add(produkt);
 
-                    //Rohstoff speichern
-                    //var roh = from a in _db.Rohstoffs where a.Id == _produktDetails._Rohstoff.Id select a;
-                    //_produktDetails._Rohstoff = roh.FirstOrDefault();
-                    _produktDetails._Rohstoff.Umweltindikator_Id = idindi.FirstOrDefault();
-                    _produktDetails._Rohstoff.Rohstoff_Id = _produktDetails._Rohstoff.Id;
-                    _db.Rohstoffs.Add(_produktDetails._Rohstoff);
-                    _db.SaveChanges();
-                    var rohid = from a in _db.Rohstoffs where (a.Rohstoff_Id == _produktDetails._Rohstoff.Id) && (a.Menge_in_t == _produktDetails._Rohstoff.Menge_in_t) select a.Id;
-                    //Rohstoff speichern Ende
 
-                    //Produkt speichern
-                    var pa = from a in _db.ProduktTyps where a.Id == _produktDetails._ProduktTyp.Id select a.Id;
-                    _produktDetails._Produkt.Typ_Id = pa.FirstOrDefault();
-                    _produktDetails._Produkt.Rohstoff_Id = rohid.FirstOrDefault();
-                    _db.Produkts.Add(_produktDetails._Produkt);
-                    _db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (DbEntityValidationException dbEx)
-            {
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
+                    viewModel = new Produkt_Typ_Rohstoff_Indikator
                     {
-                        Trace.TraceInformation("Property: {0} Error: {1}",
-                            validationError.PropertyName,
-                            validationError.ErrorMessage);
+                        _Typ_Id = _db.ProduktTyps.ToList(),
+                        _LIndikator = _db.Umweltindikators.ToList(),
+                        _Rohstoffe = _db.Rohstoffes.ToList(),
+                        ProduktRohstoff = _produktDetails.ProduktRohstoff
+                    };
+                }
+                return View(viewModel);
+            }
+            else if (whichOne == "indi")
+            {
+                if (_produktDetails != null && _produktDetails.ProduktRohstoff != null)
+                {
+                    for (int i = 0; i < _produktDetails.ProduktRohstoff.Count; i++)
+                    {
+                        if (i == indiAtRoh)
+                        {
+                            _produktDetails.ProduktRohstoff.ElementAt(i).LRohstoffe.Add(new Umweltindikatorwert());
+                        }
+                    }
+                    viewModel = new Produkt_Typ_Rohstoff_Indikator
+                    {
+                        _Typ_Id = _db.ProduktTyps.ToList(),
+                        _LIndikator = _db.Umweltindikators.ToList(),
+                        _Rohstoffe = _db.Rohstoffes.ToList(),
+                        ProduktRohstoff = _produktDetails.ProduktRohstoff
+                    };
+                }
+                return View(viewModel);
+            }
+
+            else
+            {
+                try
+                {
+                    if (ModelState.IsValid)
+                    {
+                        _produktDetails._Produkt.DateOfChanging = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+                        _produktDetails._Produkt.DateOfCreation = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+                        _produktDetails._Produkt.CreatedBy = Request.IsAuthenticated ? User.Identity.GetUserName() : "Besucher";
+                        _produktDetails._Produkt.ChangedBy = Request.IsAuthenticated ? User.Identity.GetUserName() : "Besucher";
+
+                        //Indikator speichern
+                        var indi = from a in _db.Umweltindikators where a.Id == _produktDetails._Indikator.Id select a.Id;
+                        _produktDetails._Umweltindikatorwert.Umweltindikator_Id = indi.FirstOrDefault();
+                        _produktDetails._Umweltindikatorwert.Wert = _produktDetails._Umweltindikatorwert.Wert;
+                        _db.Umweltindikatorwerts.Add(_produktDetails._Umweltindikatorwert);
+                        _db.SaveChanges();
+                        var idindi = from a in _db.Umweltindikatorwerts
+                            where (a.Umweltindikator_Id == indi.FirstOrDefault()) && (a.Wert == _produktDetails._Umweltindikatorwert.Wert)
+                            select a.Id;
+                        //Indikator speichern
+
+                        //Rohstoff speichern
+                        //var roh = from a in _db.Rohstoffs where a.Id == _produktDetails._Rohstoff.Id select a;
+                        //_produktDetails._Rohstoff = roh.FirstOrDefault();
+                        // _produktDetails._Rohstoff.Umweltindikator_Id = idindi.FirstOrDefault();
+                        _produktDetails._Rohstoff.Rohstoff_Id = _produktDetails._Rohstoff.Id;
+                        _db.Rohstoffs.Add(_produktDetails._Rohstoff);
+                        _db.SaveChanges();
+                        var rohid = from a in _db.Rohstoffs where (a.Rohstoff_Id == _produktDetails._Rohstoff.Id) && (a.Menge_in_t == _produktDetails._Rohstoff.Menge_in_t) select a.Id;
+                        //Rohstoff speichern Ende
+
+                        //Produkt speichern
+                        var pa = from a in _db.ProduktTyps where a.Id == _produktDetails._ProduktTyp.Id select a.Id;
+                        _produktDetails._Produkt.Typ_Id = pa.FirstOrDefault();
+                        // _produktDetails._Produkt.Rohstoff_Id = rohid.FirstOrDefault();
+                        _db.Produkts.Add(_produktDetails._Produkt);
+                        _db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}",
+                                validationError.PropertyName,
+                                validationError.ErrorMessage);
+                        }
                     }
                 }
             }
+           
             return HttpNotFound();
         }
 
         
+
         [HttpGet()]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string whichOne = "")
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produkt_Typ_Rohstoff_Indikator produkt = new Produkt_Typ_Rohstoff_Indikator
+            Produkt_Typ_Rohstoff_Indikator produkt= new Produkt_Typ_Rohstoff_Indikator();
+            if (whichOne == "roh")
             {
-                _Typ_Id = _db.ProduktTyps.ToList(),
-                _Produkt = _db.Produkts.Find(id),
-                _LIndikator = _db.Umweltindikators.ToList(),
-                _Rohstoffe = _db.Rohstoffes.ToList()
-            };
-            if (produkt._Produkt == null)
+                produkt = new Produkt_Typ_Rohstoff_Indikator
+                {
+                    _Typ_Id = _db.ProduktTyps.ToList(),
+                    _Produkt = _db.Produkts.Find(id),
+                    _LIndikator = _db.Umweltindikators.ToList(),
+                    _Rohstoffe = _db.Rohstoffes.ToList(),
+                };
+                if (produkt._Produkt == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            else if (whichOne == "indi")
             {
-                return HttpNotFound();
+                produkt = new Produkt_Typ_Rohstoff_Indikator
+                {
+                    _Typ_Id = _db.ProduktTyps.ToList(),
+                    _Produkt = _db.Produkts.Find(id),
+                    _LIndikator = _db.Umweltindikators.ToList(),
+                    _Rohstoffe = _db.Rohstoffes.ToList()
+                };
+                if (produkt._Produkt == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            else
+            {
+                produkt = new Produkt_Typ_Rohstoff_Indikator
+                {
+                    _Typ_Id = _db.ProduktTyps.ToList(),
+                    _Produkt = _db.Produkts.Find(id),
+                    _LIndikator = _db.Umweltindikators.ToList(),
+                    _Rohstoffe = _db.Rohstoffes.ToList()
+                };
+                if (produkt._Produkt == null)
+                {
+                    return HttpNotFound();
+                }
             }
             return View(produkt);
         }
@@ -221,9 +373,7 @@ namespace LCA_WEB.Controllers
                     //Indikator speichern
 
                     //Rohstoff speichern
-                    //var roh = from a in _db.Rohstoffs where a.Id == _produktDetails._Rohstoff.Id select a;
-                    //_produktDetails._Rohstoff = roh.FirstOrDefault();
-                    _produktDetails._Rohstoff.Umweltindikator_Id = idindi.FirstOrDefault();
+                   // _produktDetails._Rohstoff.Umweltindikator_Id = idindi.FirstOrDefault();
                     _produktDetails._Rohstoff.Rohstoff_Id = _produktDetails._Rohstoff.Id;
                     _db.Rohstoffs.Add(_produktDetails._Rohstoff);
                     _db.SaveChanges();
@@ -233,8 +383,7 @@ namespace LCA_WEB.Controllers
                     //Produkt speichern
                     var pa = from a in _db.ProduktTyps where a.Id == _produktDetails._ProduktTyp.Id select a.Id;
                     _produktDetails._Produkt.Typ_Id = pa.FirstOrDefault();
-                    _produktDetails._Produkt.Rohstoff_Id = rohid.FirstOrDefault();
-                    _db.Produkts.Add(_produktDetails._Produkt);
+                 //   _produktDetails._Produkt.Rohstoff_Id = rohid.FirstOrDefault();
                     _db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -315,7 +464,8 @@ namespace LCA_WEB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             RohstoffViewViewModel sd = new RohstoffViewViewModel();
-            sd._Rohstoffe = _db.Rohstoffes.FirstOrDefault(i => i.Name == _name.Name);
+            _name.Id = Convert.ToInt32(_name.Name);
+            sd._Rohstoffe = _db.Rohstoffes.FirstOrDefault(i => i.Id == _name.Id);
             sd._View = roh;
             if (sd._Rohstoffe == null)
             {
@@ -326,14 +476,55 @@ namespace LCA_WEB.Controllers
 
         [HttpPost, ActionName("DeleteRohstoff")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteIndikatorConfirmed(Rohstoffe _name, string roh)
+        public ActionResult DeleteRohstoffConfirmed(Rohstoffe _name, string roh)
         {
-            var p = from a in _db.Rohstoffes where a.Name.Contains(_name.Name) select a;
-            Rohstoffe asd = p.FirstOrDefault();
+            _name.Id = Convert.ToInt32(_name.Name);
+            var p = from a in _db.Rohstoffes where a.Id == _name.Id select a;
+            Rohstoffe asd = p.FirstOrDefault();//_db.Rohstoffes.FirstOrDefault(i => i.Id == _name.Id);
             if (asd != null)
             {
+                //Alle Beziehungen mit dem Rohstoff löschen
+                var li = _db.Rohstoffs.Select(s => s).ToList(); //Finde alle Rohstoffe
+                var end = _db.EndOfLifeDatas.Select(s => s).ToList(); //EndofLifeData
+                var pri = _db.ProduktRohstoffUmweltindikators.Select(s => s).ToList();
+                var iw = _db.Umweltindikatorwerts.Select(s => s).ToList();
+                //Rohstoff, EndOfLifeData , ProduktRohstoffIndikator löschen
+
+                //Rohstoff löschen
+                for (int i = 0; i < li.Count(); i++)
+                {
+                    if (li.ElementAt(i).Rohstoff_Id == asd.Id)
+                    {
+                        //Lösche EndOfLifeData
+                        for (int j = 0; j < end.Count(); j++)
+                        {
+                            if (end.ElementAt(j).Rohstoff_Id == li.ElementAt(i).Rohstoff_Id)
+                            {
+                                //Lösche ProduktRohstoffIndikator
+                                for (int z = 0; z < pri.Count(); z++)
+                                {
+                                    if (pri.ElementAt(z).Rohstoff_Id == end.ElementAt(j).Rohstoff_Id)
+                                    {
+                                        _db.ProduktRohstoffUmweltindikators.Remove(pri.ElementAt(z));
+                                    }
+                                }
+                                _db.EndOfLifeDatas.Remove(end.ElementAt(j));
+                            }
+                        }
+                        _db.Rohstoffs.Remove(li.ElementAt(i));
+                    }
+                }
+                for (int i = 0; i < iw.Count(); i++)
+                {
+                    if (iw.ElementAt(i).Rohstoff_Id == asd.Id)
+                    {
+                        _db.Entry(iw.ElementAt(i)).State = EntityState.Modified;
+                        iw.ElementAt(i).Rohstoff_Id = null;
+                    }
+                }
                 _db.Rohstoffes.Remove(asd);
             }
+            
             _db.SaveChanges();
             return RedirectToAction(roh);
         }
@@ -370,12 +561,14 @@ namespace LCA_WEB.Controllers
         [HttpGet]
         public ActionResult DeleteIndikator(Umweltindikator _name, string indi)
         {
+
             if (_name == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             IndikatorViewViewModel sd = new IndikatorViewViewModel();
-            sd._Umweltindikator = _db.Umweltindikators.FirstOrDefault(i => i.Name == _name.Name);
+            _name.Id = Convert.ToInt32(_name.Name);
+            sd._Umweltindikator = _db.Umweltindikators.FirstOrDefault(i => i.Id == _name.Id);
             sd._View = indi;
             if (sd._Umweltindikator == null)
             {
@@ -388,14 +581,26 @@ namespace LCA_WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteIndikatorConfirmed(Umweltindikator _name, string indi)
         {
-            var p = from a in _db.Umweltindikators where a.Name.Contains(_name.Name) select a;
-            Umweltindikator asd = p.FirstOrDefault();
-            if (asd != null)
+            _name.Id = Convert.ToInt32(_name.Name);
+            var pa = from a in _db.Umweltindikators where a.Id == _name.Id select a;
+            Umweltindikator asdd = pa.FirstOrDefault();
+            if (asdd != null)
             {
-                _db.Umweltindikators.Remove(asd);
+                //Finde alle Umweltindikator
+                var uw = _db.Umweltindikatorwerts.Select(s => s).ToList();
+                for (int i = 0; i < uw.Count(); i++)
+                {
+                    if (uw.ElementAt(i).Umweltindikator_Id == _name.Id)
+                    {
+                         _db.Umweltindikatorwerts.Remove(uw.ElementAt(i));
+                    }
+                }
+                _db.Umweltindikators.Remove(asdd);
             }
             _db.SaveChanges();
+            
             return RedirectToAction(indi);
+           
         }
 
         [HttpGet]
@@ -405,8 +610,9 @@ namespace LCA_WEB.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            _name.Id = Convert.ToInt32(_name.Name);
             ProduktTyp viewModel = new ProduktTyp();
-            viewModel = _db.ProduktTyps.FirstOrDefault(i => i.Name == _name.Name);
+            viewModel = _db.ProduktTyps.FirstOrDefault(i => i.Id == _name.Id);
             ProduktTypViewViewModel _deleteProduktTypView = new ProduktTypViewViewModel();
             _deleteProduktTypView._ProduktTyp = viewModel;
             _deleteProduktTypView._View = _whichView;
@@ -421,10 +627,20 @@ namespace LCA_WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteTypConfirmed(ProduktTyp _name, string _whichView)
         {
-            var p = from a in _db.ProduktTyps where a.Name.Contains(_name.Name) select a;
+            _name.Id = Convert.ToInt32(_name.Name);
+            var p = from a in _db.ProduktTyps where a.Id == _name.Id select a;
+            var pr = _db.Produkts.Select(s => s).ToList();
             ProduktTyp asd = p.FirstOrDefault();
             if (asd != null)
             {
+                for (int i = 0; i < pr.Count(); i++)
+                {
+                    if (pr.ElementAt(i).Typ_Id == _name.Id)
+                    {
+                        _db.Entry(pr.ElementAt(i)).State = EntityState.Modified;
+                        pr.ElementAt(i).Typ_Id = null;
+                    }
+                }
                 _db.ProduktTyps.Remove(asd);
             }
             _db.SaveChanges();
