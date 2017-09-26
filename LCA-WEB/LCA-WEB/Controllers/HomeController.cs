@@ -420,6 +420,8 @@ namespace LCA_WEB.Controllers
             // var uwi = _db.Umweltindikators.Select(s => s).ToList();//Finde alle Umwelindikatoren
 
             List<Umweltindikatorwert> lUmweltind = new List<Umweltindikatorwert>();
+            List<Umweltindikatorwert> lUmweltindGesamt = new List<Umweltindikatorwert>();
+            
             List<Rohstoff> lRohstoff = new List<Rohstoff>();
             foreach (var itemRo in ro)
             {
@@ -431,6 +433,24 @@ namespace LCA_WEB.Controllers
                         if (itemRo.Id == itemUw.Rohstoff_Id)
                         {
                             lUmweltind.Add(itemUw);
+                            var itemProUw = lUmweltindGesamt.Find(i => i.Umweltindikator_Id == itemUw.Umweltindikator_Id);
+                                if (itemProUw != null)
+                                {
+                                    //Summe der Umweltindikatoren
+                                    var total1 = itemUw.Wert * itemRo.Menge_in_t;
+                                    int valInt1 = Convert.ToInt32(total1);
+                                    itemProUw.Wert += valInt1;
+                                }
+                                else
+                                {
+                                    //Add Umweltindikator
+                                    var total2 = itemUw.Wert * itemRo.Menge_in_t;
+                                    Umweltindikatorwert itemUwGe = new Umweltindikatorwert();
+                                    int valInt2 = Convert.ToInt32(total2);
+                                    itemUwGe.Wert = valInt2;
+                                    itemUwGe.Umweltindikator_Id = itemUw.Umweltindikator_Id;
+                                    lUmweltindGesamt.Add(itemUwGe);
+                                }
                         }
                     }
                 }
@@ -446,12 +466,21 @@ namespace LCA_WEB.Controllers
 
             //Diagramm-Data
             List<DataPoint> dataPoints = new List<DataPoint>();
-            foreach (var itemUw in _view._LUmweltindikatorwert)
+            foreach (var itemUw in lUmweltindGesamt)
             {
                 dataPoints.Add(new DataPoint(_view._LIndikator.FirstOrDefault(i => i.Id == itemUw.Umweltindikator_Id).Name, itemUw.Wert));
             }
-
             ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+
+            //Diagramm-Data
+            List<DataPointDec> dataPointsRoh = new List<DataPointDec>();
+            foreach (var itemRoh in _view._LRohstoff)
+            {
+                dataPointsRoh.Add(new DataPointDec(_view._Rohstoffe.FirstOrDefault(i => i.Id == itemRoh.Rohstoff_Id).Name, 
+                    _view._Rohstoffe.FirstOrDefault(i => i.Id == itemRoh.Rohstoff_Id).Name, itemRoh.Menge_in_t));
+            }
+            ViewBag.DataPointsRoh = JsonConvert.SerializeObject(dataPointsRoh);
+
             return View(_view);
         }
 

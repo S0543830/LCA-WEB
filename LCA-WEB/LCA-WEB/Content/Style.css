@@ -88,6 +88,21 @@ a:active {
     justify-content: center;
 }
 
+.ChartDivLeft {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+
+.ChartDivRight {
+    width: 50%;
+    height: 100%;
+    float: right;
+}
+
+
+
 #startSiteDivRight > div > h2 {
     text-align: center;
     color: #917197;

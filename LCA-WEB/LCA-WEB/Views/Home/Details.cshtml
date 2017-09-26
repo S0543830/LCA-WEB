@@ -66,6 +66,7 @@
                                 <th>Umweltindikator:</th>
                                 <th>Umweltindikator Wert:</th>
                                 <th>Scope:</th>
+                                <th>Menge Gesamt:</th>
                             </tr>
                             @* } *@
                             @for (int i = 0; i < Model._LUmweltindikatorwert.Count; i++)
@@ -76,9 +77,12 @@
                                     <td>@Html.DisplayFor(model => model._LIndikator.FirstOrDefault(m => m.Id == Model._LUmweltindikatorwert.ElementAt(i).Umweltindikator_Id).Name)</td>
                                     <td>@Html.DisplayFor(model => model._LUmweltindikatorwert.ElementAt(i).Wert)</td>
                                     <td>@Html.DisplayFor(model => model._LIndikator.FirstOrDefault(m => m.Id == Model._LUmweltindikatorwert.ElementAt(i).Umweltindikator_Id).Scope)</td>
+                                    @{var total = Model._LRohstoff.FirstOrDefault(r => r.Id == Model._LRohstoff.ElementAt(j).Id).Menge_in_t * Model._LUmweltindikatorwert.ElementAt(i).Wert;}
+                                    <td>@Html.Raw(total.ToString())</td>
+                                    
                                 </tr>
-                                }
-                            }
+                                            }
+                                        }
                         </table>
                     </td>
                 </tr>
@@ -106,25 +110,56 @@
         </tr>*@
     </table>
     <hr />
-    <div id="chartContainer" style="width: 75%; height: 300px"></div>
+    <div id="chartContainer" style="width: 50%; height: 300px" class="ChartDivLeft"></div>
+    <div id="chartContainer2" style="width: 50%; height: 300px" class="ChartDivRight"></div>
     <script type="text/javascript">
 
-            window.onload = function () {
-                var chart = new CanvasJS.Chart("chartContainer", {
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                //  $("#chartContainer").CanvasJSChart({
+                title: {
+                    text: "Umweltindikatoren",
+                    fontSize: 20,
+                    fontFamily: "Helvetica"
+
+                },
+                axisY: {
+                    title: ""
+                },
+
+                data: [{
+                    type: "column",
+                    indexLabelFontFamily: "Garamond",
+                    indexLabelFontSize: 20,
+                    startAngle: -20,
+                    showInLegend: true,
+                    dataPoints: @Html.Raw(ViewBag.DataPoints),
+                }]
+             });             
+             chart.render();
+
+               var chart2 = new CanvasJS.Chart("chartContainer2", {
                     //  $("#chartContainer").CanvasJSChart({
                     title: {
-                        text: "Herstellungsphase"
-                    },
-                    axisY: {
-                        title: ""
-                    },
+                        text: "Rohstoffe",
+                        fontSize: 20,
+                        fontFamily: "Helvetica"
 
+                    },
+                    animationEnabled: true,
+                    theme: "theme2",
                     data: [{
-                        type: "column",
-                        dataPoints: @Html.Raw(ViewBag.DataPoints),
-                          }]
-            });
-            chart.render();
+                        type: "doughnut",
+                        indexLabel: "{label} {y} t",
+                        indexLabelFontFamily: "Garamond",
+                        indexLabelFontSize: 20,
+                        startAngle: -20,
+                        showInLegend: true,
+                        toolTipContent: "{legendText} {y} t",
+                        dataPoints: @Html.Raw(ViewBag.DataPointsRoh),
+                         }]
+                });
+                chart2.render();
         };
     </script>
 </div>

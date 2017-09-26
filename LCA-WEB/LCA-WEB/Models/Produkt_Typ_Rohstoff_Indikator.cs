@@ -84,5 +84,29 @@ namespace LCA_WEB.Models
         public Nullable<int> Y = null;
 
     }
+
+    [DataContract]
+    public class DataPointDec
+    {
+        public DataPointDec(string label, string legendText, decimal? y)
+        {
+            this.Y = y;
+            this.Label = label;
+            this.LegendText = legendText;
+        }
+
+        //Explicitly setting the name to be used while serializing to JSON. 
+        [DataMember(Name = "label")]
+        public string Label = null;
+
+        //Explicitly setting the name to be used while serializing to JSON. 
+        [DataMember(Name = "legendText")]
+        public string LegendText = null;
+
+        //Explicitly setting the name to be used while serializing to JSON.
+        [DataMember(Name = "y")]
+        public Nullable<decimal> Y = null;
+
+    }
 }
 
