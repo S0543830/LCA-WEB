@@ -64,6 +64,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         <title>@ViewBag.Title - LCAweb</title>
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
@@ -72,7 +73,7 @@
     <body>
         <div class="navbar">
             <a href='@Url.Action("Index", "Home")'>
-                <img id="logo" src='@Url.Content("../Images/LogoGBUI_dunkelBlauHG.png")' />
+                <img id="logo" src='@Url.Content("../../Images/LogoGBUI_dunkelBlauHG.png")' />
             </a>
             <ul>
                 <li>@Html.ActionLink("Hilfe", "Help", "Home")</li>

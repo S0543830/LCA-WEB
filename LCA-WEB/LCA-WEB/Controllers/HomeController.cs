@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using LCA_WEB.Models;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using Newtonsoft.Json; // notwendig für die Diagramme
 namespace LCA_WEB.Controllers
 {
     public class HomeController : Controller
@@ -407,9 +408,51 @@ namespace LCA_WEB.Controllers
 
 
         [HttpGet()]
-        public ActionResult Details()
+        public ActionResult Details(int? id)
         {
-            return View();
+            var proid = _db.Produkts.Find(id);
+            var ro = _db.Rohstoffs.Select(s => s).ToList();
+            var uw = _db.Umweltindikatorwerts.Select(s => s).ToList();
+
+            // var pri = _db.ProduktRohstoffUmweltindikators.Select(s => s).ToList();
+
+            // var roh = _db.Rohstoffes.Select(s => s).ToList();//Finde alle Rohstoffe
+            // var uwi = _db.Umweltindikators.Select(s => s).ToList();//Finde alle Umwelindikatoren
+
+            List<Umweltindikatorwert> lUmweltind = new List<Umweltindikatorwert>();
+            List<Rohstoff> lRohstoff = new List<Rohstoff>();
+            foreach (var itemRo in ro)
+            {
+                if (itemRo.Produkt_Id == proid.Id)
+                {
+                    lRohstoff.Add(itemRo);
+                    foreach (var itemUw in uw)
+                    {
+                        if (itemRo.Id == itemUw.Rohstoff_Id)
+                        {
+                            lUmweltind.Add(itemUw);
+                        }
+                    }
+                }
+            }
+
+            Produkt_Typ_Rohstoff_Indikator _view = new Produkt_Typ_Rohstoff_Indikator();
+            _view._Produkt = proid;
+            _view._ProduktTyp = _db.ProduktTyps.FirstOrDefault(i => i.Id == _view._Produkt.Typ_Id);
+            _view._LRohstoff = lRohstoff;
+            _view._Rohstoffe = _db.Rohstoffes.Select(s => s).ToList();
+            _view._LUmweltindikatorwert = lUmweltind;
+            _view._LIndikator = _db.Umweltindikators.Select(s => s).ToList();
+
+            //Diagramm-Data
+            List<DataPoint> dataPoints = new List<DataPoint>();
+            foreach (var itemUw in _view._LUmweltindikatorwert)
+            {
+                dataPoints.Add(new DataPoint(_view._LIndikator.FirstOrDefault(i => i.Id == itemUw.Umweltindikator_Id).Name, itemUw.Wert));
+            }
+
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+            return View(_view);
         }
 
         [HttpGet]
