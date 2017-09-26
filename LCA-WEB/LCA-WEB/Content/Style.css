@@ -49,6 +49,7 @@ li:last-child {
         li a:hover:not(.active) {
             background-color: #4CAF50;
         }
+        
 
 .active {
     background-color: #4CAF50;
@@ -67,6 +68,15 @@ a.my-class {
 .my-class {color: black}
 span.my-class {color: black}
 
+#wrapper {
+    min-height:100%;
+    position:relative;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+}
 article,
 aside,
 details,
@@ -316,6 +326,10 @@ footer li a {
 
 .ObjectContent {
     margin: 140px 40px auto;
+}
+
+#sort {
+    color: #000000;
 }
 
 #icon {

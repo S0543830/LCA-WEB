@@ -24,13 +24,14 @@
         </fieldset>
         <table class="tableObjectlist" style="border: 0">
             <tr>
-                <th >@Html.ActionLink("Name", "Index", new
-                    {
-                        sortOn
+                <th >@Html.ActionLink("Sortieren nach Name", "Index", new
+                {
+                    sortOn
                             = "Name",
-                        orderBy = ViewBag.OrderBy, pSortOn = ViewBag.SortOn, keyword =
+                    orderBy = ViewBag.OrderBy, pSortOn = ViewBag.SortOn, keyword =
                             ViewBag.Keyword
-                    },new {})
+
+                },new {@id ="sort"})
                 </th>
             </tr>
             @foreach (var item in Model)
