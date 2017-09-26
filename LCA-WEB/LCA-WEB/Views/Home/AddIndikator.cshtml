@@ -4,6 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style type="text/css">.my-class {color: black}
+ span.my-class {color: black}
+ a.my-class {color: black}
+</style>
+
 @using (Html.BeginForm("AddIndikator","Home",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -28,8 +33,11 @@
         </tr>
     </table>
     <br/>
-   
+    <div>
     <input type="submit" value="Erstellen" class="btn btn-default"/>
+        |
+        <span style="color: black">@Html.ActionLink("Zurück", Model._View,null, new { @class="my-class" })</span>
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

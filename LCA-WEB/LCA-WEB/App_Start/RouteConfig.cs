@@ -10,6 +10,12 @@ namespace LCA_WEB
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "addRowIndi",
+                url: "{controller}/{action}/{atRow}",
+                defaults: new { controller = "Home", action = "AddNewRowIndikator", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Delete",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Delete", id = UrlParameter.Optional }

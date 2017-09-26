@@ -22,7 +22,7 @@
                 </div>
             </div>
         </fieldset>
-        <table class="tableObjectlist">
+        <table class="tableObjectlist" style="border: 0">
             <tr>
                 <th >@Html.ActionLink("Name", "Index", new
                     {
@@ -56,11 +56,11 @@
     </div>
     <div class="pagedList">
         @Html.PagedListPager(Model, page => Url.Action("Index", new
-        {
-            page, sortOn = ViewBag.SortOn, orderBy = ViewBag.OrderBy, pSortOn =
+   {
+       page, sortOn = ViewBag.SortOn, orderBy = ViewBag.OrderBy, pSortOn =
                 ViewBag.SortOn,
-            keyword = ViewBag.Keyword
-        }),
+       keyword = ViewBag.Keyword
+   }),
             PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
 }

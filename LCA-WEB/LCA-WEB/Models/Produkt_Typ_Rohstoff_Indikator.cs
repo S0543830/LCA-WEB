@@ -8,6 +8,11 @@ using LCA_WEB.Models;
 
 namespace LCA_WEB.Models
 {
+    public class ListProdukt
+    {
+        public List<Produkt_Typ_Rohstoff_Indikator> lProdukt;
+    }
+
     public class Produkt_Typ_Rohstoff_Indikator
     {
         public List<ProduktTyp> _Typ_Id { get; set; }

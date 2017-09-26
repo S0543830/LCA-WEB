@@ -3,6 +3,10 @@
     ViewBag.Title = "Typen eines Produktes hinzufügen";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style type="text/css">.my-class {color: black}
+ span.my-class {color: black}
+ a.my-class {color: black}
+</style>
 @using (Html.BeginForm("AddProduktTyp","Home",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -23,8 +27,11 @@
    
    
     <br />
-    <input  type="submit" value="Erstellen" class="btn btn-default" />
-
+    <div>
+        <input type="submit" value="Erstellen" class="btn btn-default"/>
+        |
+        <span style="color: black">@Html.ActionLink("Zurück", Model._View,null, new { @class="my-class" })</span>
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

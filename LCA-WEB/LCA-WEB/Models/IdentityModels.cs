@@ -20,7 +20,7 @@ namespace LCA_WEB.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DbWebLcaEntities")
+            : base("DbWebAspNetEntities")
         {
         }
 

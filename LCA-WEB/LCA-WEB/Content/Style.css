@@ -12,12 +12,60 @@ html, body {
     position: relative;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /*background-color: #333;*/
+}
+.pagination li a{
+    
+        background-color: #282c2b;
+    
+}
+.pagination li span{
+    
+    background-color: #282c2b;
+    
+}
+li {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+
+li:last-child {
+        border-right: none;
+}
+
+    li a {
+        display: block;
+        color: Black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        background-color: #282952;
+    }
+
+        li a:hover:not(.active) {
+            background-color: #4CAF50;
+        }
+
+.active {
+    background-color: #4CAF50;
+}
+
 a.draw {
     background: url(../Images/001-draw.png) no-repeat top left;
     display: block;
     width: 13px;
    
 }
+
+a.my-class {
+    color: black
+}
+.my-class {color: black}
+span.my-class {color: black}
 
 article,
 aside,
@@ -156,7 +204,7 @@ table, td, th {
     align-items: center;
     vertical-align: middle;
     text-align: center;
-    margin: 0px;
+    /*margin: 0px;*/
     display: table-cell;
     font-size: 13px;
     height: 26px;
@@ -214,7 +262,7 @@ footer ul {
 footer li {
     float: left;
     margin-left: 10px;
-    vertical-align: bottom;
+    /*vertical-align: bottom;*/
     color: white;
     display: block;
     text-align: center;
@@ -372,7 +420,7 @@ hr.style3 {
     font-size: 14px;
     line-height: 1.428571429;
     color: #555555;
-    vertical-align: middle;
+    /*vertical-align: middle;*/
     background-color: #ffffff;
     border: 1px solid #cccccc;
     border-radius: 4px;

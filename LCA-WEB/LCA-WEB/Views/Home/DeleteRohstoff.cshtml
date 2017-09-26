@@ -3,7 +3,19 @@
     ViewBag.Title = "Löschen eines Rohstoffes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style type="text/css">
+    .my-class {
+        color: black
+    }
 
+    span.my-class {
+        color: black
+    }
+
+    a.my-class {
+        color: black
+    }
+</style>
 
 <h3>Sind Sie sicher folgenden Rohstoff löschen zu wollen: @Html.DisplayFor(model => model._Rohstoffe.Name)?</h3>
 @using (Html.BeginForm())
@@ -12,6 +24,6 @@
     <div>
         <input type="submit" value="Delete" class="btn btn-default"  />
         |
-        @Html.ActionLink("Back to List", Model._View)
-    </div>
+        <span style="color: black">@Html.ActionLink("Zurück", Model._View, null, new { @class = "my-class" })</span>
+</div>
 }

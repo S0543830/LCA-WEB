@@ -192,49 +192,19 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbLCAWebDasRichtige.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbLCAWebDasRichtige.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbLCAWebDasRichtige.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbLCAWebDasRichtige.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbLCAWebDasRichtige.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbLCAWebDasRichtige.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbNew.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbNew.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbNew.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbNew.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbNew.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbNew.edmx</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbWeb.Context.cs">
       <AutoGen>True</AutoGen>
@@ -251,46 +221,46 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbWeb.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbWebLca.Context.cs">
+    <Compile Include="Models\DbWebAsp.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbWebLca.Context.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbWebLca.cs">
+    <Compile Include="Models\DbWebAsp.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbWebLca.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbWebLca.Designer.cs">
+    <Compile Include="Models\DbWebAsp.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbWebLca.edmx</DependentUpon>
+      <DependentUpon>DbWebAsp.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\EndOfLifeData.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Produkt.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProduktRohstoffUmweltindikator.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProduktTyp.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Produkt_Typ_Rohstoff_Indikator.cs" />
     <Compile Include="Models\Rohstoff.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rohstoffe.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Umweltindikator.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Umweltindikatorwert.cs">
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebAsp.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -312,26 +282,6 @@
     <Content Include="Images\CradleToGrave.png" />
     <Content Include="Images\LogoGBUI_dunkelBlauHG.png" />
     <Content Include="Images\Ökobilanz.png" />
-    <Content Include="Models\DbLCAWebDasRichtige.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbLCAWebDasRichtige.edmx</DependentUpon>
-      <LastGenOutput>DbLCAWebDasRichtige.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DbLCAWebDasRichtige.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbLCAWebDasRichtige.edmx</DependentUpon>
-      <LastGenOutput>DbLCAWebDasRichtige.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DbNew.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbNew.edmx</DependentUpon>
-      <LastGenOutput>DbNew.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DbNew.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbNew.edmx</DependentUpon>
-      <LastGenOutput>DbNew.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\DbWeb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DbWeb.edmx</DependentUpon>
@@ -342,45 +292,31 @@
       <DependentUpon>DbWeb.edmx</DependentUpon>
       <LastGenOutput>DbWeb.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DbWebLca.Context.tt">
+    <Content Include="Models\DbWebAsp.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbWebLca.edmx</DependentUpon>
-      <LastGenOutput>DbWebLca.Context.cs</LastGenOutput>
+      <DependentUpon>DbWebAsp.edmx</DependentUpon>
+      <LastGenOutput>DbWebAsp.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DbWebLca.tt">
+    <Content Include="Models\DbWebAsp.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbWebLca.edmx</DependentUpon>
-      <LastGenOutput>DbWebLca.cs</LastGenOutput>
+      <DependentUpon>DbWebAsp.edmx</DependentUpon>
+      <LastGenOutput>DbWebAsp.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\DbNew.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DbNew.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DbNew.edmx.diagram">
-      <DependentUpon>DbNew.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\DbLCAWebDasRichtige.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DbLCAWebDasRichtige.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DbLCAWebDasRichtige.edmx.diagram">
-      <DependentUpon>DbLCAWebDasRichtige.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\DbWebLca.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DbWebLca.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DbWebLca.edmx.diagram">
-      <DependentUpon>DbWebLca.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\DbWeb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DbWeb.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\DbWeb.edmx.diagram">
       <DependentUpon>DbWeb.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DbWebAsp.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbWebAsp.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DbWebAsp.edmx.diagram">
+      <DependentUpon>DbWebAsp.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
