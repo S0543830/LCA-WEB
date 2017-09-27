@@ -20,17 +20,20 @@
                 <div class="horizontalBarItems">
                     <p id="btn-link">@Html.ActionLink(" + Objekt hinzufügen", "Create")</p>
                 </div>
+                <div class="horizontalBarItems">
+                    <p id="btn-link">@Html.ActionLink(" + Objekte vergleichen", "Compare")</p>
+                </div>
             </div>
         </fieldset>
         <table class="tableObjectlist">
             <tr>
-                <th >@Html.ActionLink("Name", "Index", new
+                <th >@Html.ActionLink("Sortieren nach Name", "Index", new
                     {
                         sortOn
                             = "Name",
                         orderBy = ViewBag.OrderBy, pSortOn = ViewBag.SortOn, keyword =
                             ViewBag.Keyword
-                    },new {})
+                    },new {@id ="sort"})
                 </th>
             </tr>
             @foreach (var item in Model)

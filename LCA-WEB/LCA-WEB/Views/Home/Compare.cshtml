@@ -1,0 +1,67 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<LCA_WEB.Models.Produkt>
+    @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    @{
+    ViewBag.Title = "Objekt auswählen";
+    }
+    @using (Html.BeginForm())
+    {
+    <div class="ObjectBoxes">
+        <fieldset>
+            <div class="horizontalBar">
+                <input type="text" name="keyword" @*required value="@ViewBag.Keyword" *@ />
+                <a> </a>
+                <input class="btn-default" type="submit" value="Suche" />
+            </div>
+        </fieldset>
+        <table class="tableObjectlist">
+            <tr>
+                <th>
+                    @Html.ActionLink("Sortieren nach Name", "Index", new
+               {
+                   sortOn
+                    = "Name",
+                   orderBy = ViewBag.OrderBy, pSortOn = ViewBag.SortOn, keyword =
+                    ViewBag.Keyword
+               },new { @id = "sort" })
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr class="listObjectChoice">
+                <td>
+                    <a href='@Url.Action("Details", "Home", new {id = item.Id})'>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+                <td class="listObjectChoicekurzNew">
+                    <input type="checkbox" name="item" value="@Html.DisplayFor(modelItem => item.Id)">
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+    <div>
+        <input type="button" value="Vergleichen" onclick="location.href='@Url.Action("CompareTwo","Home", new {id1 = 60, id2 = 55})' " class="btn btn-default" />
+    </div>
+    <div class="pagedList">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new
+        {
+        page, sortOn = ViewBag.SortOn, orderBy = ViewBag.OrderBy, pSortOn =
+        ViewBag.SortOn,
+        keyword = ViewBag.Keyword
+        }),
+        PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </div>
+
+
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+<script>
+    
+</script>
+}
+}

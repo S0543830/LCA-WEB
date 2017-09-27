@@ -18,7 +18,17 @@ a.draw {
     width: 13px;
    
 }
-
+#wrapper {
+    min-height: 100%;
+    position: relative;
+}
+#sort {
+    color: black;
+}
+footer {
+    position: absolute;
+    bottom: 0px;
+}
 article,
 aside,
 details,
@@ -88,16 +98,14 @@ a:active {
     justify-content: center;
 }
 
-.ChartDivLeft {
+.CompareDivLeft {
     width: 50%;
-    height: 100%;
     float: left;
 }
 
 
-.ChartDivRight {
+.CompareDivRight {
     width: 50%;
-    height: 100%;
     float: right;
 }
 
@@ -309,6 +317,13 @@ footer li a {
     color: white;
     width: 50px;
 }
+
+.listObjectChoicekurzNew {
+    background-color: #282c2b;
+    color: white;
+    width: 20px;
+}
+
 
 .listObjectChoice:hover {
     border-style: solid;

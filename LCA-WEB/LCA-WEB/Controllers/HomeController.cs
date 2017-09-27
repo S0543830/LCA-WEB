@@ -791,5 +791,186 @@ namespace LCA_WEB.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Compare(string sortOn, string orderBy,
+            string pSortOn, string keyword, int? page)
+        {
+            //if (Request.IsAuthenticated)
+            {
+
+                int recordsPerPage = 10;
+                if (!page.HasValue)
+                {
+                    page = 1; // set initial page value
+                    if (string.IsNullOrWhiteSpace(orderBy) || orderBy.Equals("asc"))
+                    {
+                        orderBy = "desc";
+                    }
+                    else
+                    {
+                        orderBy = "asc";
+                    }
+                }
+                if (!string.IsNullOrWhiteSpace(sortOn) && !sortOn.Equals(pSortOn,
+                        StringComparison.CurrentCultureIgnoreCase))
+                {
+                    orderBy = "asc";
+                }
+
+                ViewBag.OrderBy = orderBy;
+                ViewBag.SortOn = sortOn;
+                ViewBag.Keyword = keyword;
+
+                var list = _db.Produkts.AsQueryable();
+
+                switch (sortOn)
+                {
+                    case "Name":
+                        if (orderBy.Equals("desc"))
+                        {
+                            list = list.OrderByDescending(p => p.Name);
+                        }
+                        else
+                        {
+                            list = list.OrderBy(p => p.Name);
+                        }
+                        break;
+                    default:
+                        list = list.OrderBy(p => p.Id);
+                        break;
+                }
+                if (!string.IsNullOrWhiteSpace(keyword))
+                {
+                    list = list.Where(f => f.Name.StartsWith(keyword));
+                }
+                var finalList = list.ToPagedList(page.Value, recordsPerPage);
+                return View(finalList);
+
+            }
+        }
+
+        [HttpGet]
+        public ActionResult CompareTwo(int id1, int id2)
+        {
+            var proid = _db.Produkts.Find(id1);
+            var proid2 = _db.Produkts.Find(id2);
+            var ro = _db.Rohstoffs.Select(s => s).ToList();
+            var uw = _db.Umweltindikatorwerts.Select(s => s).ToList();
+
+            //Produkt1
+            List<Umweltindikatorwert> lUmweltind = new List<Umweltindikatorwert>();
+            List<Umweltindikatorwert> lUmweltindGesamt = new List<Umweltindikatorwert>();
+            List<Rohstoff> lRohstoff = new List<Rohstoff>();
+
+            //Produkt2
+            List<Umweltindikatorwert> lUmweltind2 = new List<Umweltindikatorwert>();
+            List<Umweltindikatorwert> lUmweltindGesamt2 = new List<Umweltindikatorwert>();
+            List<Rohstoff> lRohstoff2 = new List<Rohstoff>();
+
+
+            foreach (var itemRo in ro)
+            {
+                //Produkt 1
+                if (itemRo.Produkt_Id == proid.Id)
+                {
+                    lRohstoff.Add(itemRo);
+                    foreach (var itemUw in uw)
+                    {
+                        if (itemRo.Id == itemUw.Rohstoff_Id)
+                        {
+                            lUmweltind.Add(itemUw);
+                            var itemProUw = lUmweltindGesamt.Find(i => i.Umweltindikator_Id == itemUw.Umweltindikator_Id);
+                            if (itemProUw != null)
+                            {
+                                //Summe der Umweltindikatoren
+                                var total1 = itemUw.Wert * itemRo.Menge_in_t;
+                                int valInt1 = Convert.ToInt32(total1);
+                                itemProUw.Wert += valInt1;
+                            }
+                            else
+                            {
+                                //Add Umweltindikator
+                                var total2 = itemUw.Wert * itemRo.Menge_in_t;
+                                Umweltindikatorwert itemUwGe = new Umweltindikatorwert();
+                                int valInt2 = Convert.ToInt32(total2);
+                                itemUwGe.Wert = valInt2;
+                                itemUwGe.Umweltindikator_Id = itemUw.Umweltindikator_Id;
+                                lUmweltindGesamt.Add(itemUwGe);
+                            }
+                        }
+                    }
+                }
+
+                if (itemRo.Produkt_Id == proid2.Id)
+                {
+                    lRohstoff2.Add(itemRo);
+                    foreach (var itemUw in uw)
+                    {
+                        if (itemRo.Id == itemUw.Rohstoff_Id)
+                        {
+                            lUmweltind2.Add(itemUw);
+                            var itemProUw = lUmweltindGesamt2.Find(i => i.Umweltindikator_Id == itemUw.Umweltindikator_Id);
+                            if (itemProUw != null)
+                            {
+                                //Summe der Umweltindikatoren
+                                var total1 = itemUw.Wert * itemRo.Menge_in_t;
+                                int valInt1 = Convert.ToInt32(total1);
+                                itemProUw.Wert += valInt1;
+                            }
+                            else
+                            {
+                                //Add Umweltindikator
+                                var total2 = itemUw.Wert * itemRo.Menge_in_t;
+                                Umweltindikatorwert itemUwGe = new Umweltindikatorwert();
+                                int valInt2 = Convert.ToInt32(total2);
+                                itemUwGe.Wert = valInt2;
+                                itemUwGe.Umweltindikator_Id = itemUw.Umweltindikator_Id;
+                                lUmweltindGesamt2.Add(itemUwGe);
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            Produkt_Typ_Rohstoff_Indikator _view = new Produkt_Typ_Rohstoff_Indikator();
+            _view._Produkt = proid;
+            _view._ProduktTyp = _db.ProduktTyps.FirstOrDefault(i => i.Id == _view._Produkt.Typ_Id);
+            _view._LRohstoff = lRohstoff;
+            _view._Rohstoffe = _db.Rohstoffes.Select(s => s).ToList();
+            _view._LUmweltindikatorwert = lUmweltind;
+            _view._LIndikator = _db.Umweltindikators.Select(s => s).ToList();
+
+            Produkt_Typ_Rohstoff_Indikator _view2 = new Produkt_Typ_Rohstoff_Indikator();
+            _view2._Produkt = proid2;
+            _view2._ProduktTyp = _db.ProduktTyps.FirstOrDefault(i => i.Id == _view2._Produkt.Typ_Id);
+            _view2._LRohstoff = lRohstoff2;
+            _view2._Rohstoffe = _db.Rohstoffes.Select(s => s).ToList();
+            _view2._LUmweltindikatorwert = lUmweltind2;
+            _view2._LIndikator = _db.Umweltindikators.Select(s => s).ToList();
+
+            ProduktDataList _viewCompare = new ProduktDataList();
+            List<Produkt_Typ_Rohstoff_Indikator> ListAll = new List<Produkt_Typ_Rohstoff_Indikator>();
+            ListAll.Add(_view);
+            ListAll.Add(_view2);
+            _viewCompare._ListProduct = ListAll;
+
+            //Diagramm-Data
+            List<DataPoint> dataPoints = new List<DataPoint>();
+            foreach (var itemUw in lUmweltindGesamt)
+            {
+                dataPoints.Add(new DataPoint(_view._LIndikator.FirstOrDefault(i => i.Id == itemUw.Umweltindikator_Id).Name, itemUw.Wert));
+            }
+            List<DataPoint> dataPoints2 = new List<DataPoint>();
+            foreach (var itemUw in lUmweltindGesamt2)
+            {
+                dataPoints2.Add(new DataPoint(_view._LIndikator.FirstOrDefault(i => i.Id == itemUw.Umweltindikator_Id).Name, itemUw.Wert));
+            }
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+            ViewBag.DataPoints2 = JsonConvert.SerializeObject(dataPoints2);
+
+
+            return View(_viewCompare);
+        }
     }
 }
