@@ -9,12 +9,13 @@ using System.Web.Mvc;
 using LCA_WEB.Models;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using Newtonsoft.Json; // notwendig für die Diagramme
 namespace LCA_WEB.Controllers
 {
     public class HomeController : Controller
     {
 
-        private DbWebAspNetEntities _db = new DbWebAspNetEntities();
+        private DbWebModelEntities _db = new DbWebModelEntities();
 
         public ActionResult Index(string sortOn, string orderBy,
             string pSortOn, string keyword, int? page)
@@ -109,57 +110,10 @@ namespace LCA_WEB.Controllers
 
 
         [HttpGet]
-        public ActionResult Create(Produkt_Typ_Rohstoff_Indikator _produktTypRohstoffIndikator = null, int indiAtRoh = 0, string whichOne ="")
+        public ActionResult Create(Produkt_Typ_Rohstoff_Indikator _produktTypRohstoffIndikator = null)
         {
-            RohstoffIndikatorBeziehung tmp = new RohstoffIndikatorBeziehung();
-            
-            
             Produkt_Typ_Rohstoff_Indikator viewModel = new Produkt_Typ_Rohstoff_Indikator();
-            if (whichOne == "roh")
-            {
-                tmp.AnzahlIndikatorProRohstoff = 1;
-                if (_produktTypRohstoffIndikator != null )
-                {
-                    
-                        ProduktRohstoff produkt = new ProduktRohstoff();
-                        produkt.LRohstoffe = new List<Umweltindikatorwert>();
-                        produkt.Rohstoff = new Rohstoff();
-                        produkt.LRohstoffe.Add(new Umweltindikatorwert());
-                        _produktTypRohstoffIndikator.ProduktRohstoff.Add(produkt);
-                        
-                    
-                    viewModel = new Produkt_Typ_Rohstoff_Indikator
-                    {
-                        _Typ_Id = _db.ProduktTyps.ToList(),
-                        _LIndikator = _db.Umweltindikators.ToList(),
-                        _Rohstoffe = _db.Rohstoffes.ToList(),
-                        ProduktRohstoff = _produktTypRohstoffIndikator.ProduktRohstoff
-                    };
-                }
-            }
-            else if (whichOne == "indi")
-            {
-                if (_produktTypRohstoffIndikator != null && _produktTypRohstoffIndikator.ProduktRohstoff != null)
-                {
-                    for (int i = 0; i < _produktTypRohstoffIndikator.ProduktRohstoff.Count; i++)
-                    {
-                        if (i == indiAtRoh)
-                        {
-                            _produktTypRohstoffIndikator.ProduktRohstoff.ElementAt(i).LRohstoffe.Add(new Umweltindikatorwert());
-                        }
-                    }
-                    viewModel = new Produkt_Typ_Rohstoff_Indikator
-                    {
-                        _Typ_Id = _db.ProduktTyps.ToList(),
-                        _LIndikator = _db.Umweltindikators.ToList(),
-                        _Rohstoffe = _db.Rohstoffes.ToList(),
-                        ProduktRohstoff = _produktTypRohstoffIndikator.ProduktRohstoff
-                    };
-                }
-            }
-            else
-            {
-                ProduktRohstoff produktRohstoff = new ProduktRohstoff();
+            ProduktRohstoff produktRohstoff = new ProduktRohstoff();
                 produktRohstoff.LRohstoffe = new List<Umweltindikatorwert>();
                 produktRohstoff.LRohstoffe.Add(new Umweltindikatorwert());
                 if (_produktTypRohstoffIndikator != null)
@@ -171,11 +125,10 @@ namespace LCA_WEB.Controllers
                         _Typ_Id = _db.ProduktTyps.ToList(),
                         _LIndikator = _db.Umweltindikators.ToList(),
                         _Rohstoffe = _db.Rohstoffes.ToList(),
-                        ProduktRohstoff = _produktTypRohstoffIndikator.ProduktRohstoff
+                        ProduktRohstoff = _produktTypRohstoffIndikator.ProduktRohstoff,
+                        _MengeEinheit = _db.MengeEinheits.ToList()
                     };
                 }
-            }
-           
             return View(viewModel);
         }
 
@@ -191,6 +144,7 @@ namespace LCA_WEB.Controllers
                         _produktDetails._Produkt.DateOfCreation = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
                         _produktDetails._Produkt.CreatedBy = Request.IsAuthenticated ? User.Identity.GetUserName() : "Besucher";
                         _produktDetails._Produkt.ChangedBy = Request.IsAuthenticated ? User.Identity.GetUserName() : "Besucher";
+                        _produktDetails._Produkt.Typ_Id = _produktDetails._ProduktTyp.Id;
                         _db.Produkts.Add(_produktDetails._Produkt);
                         _db.SaveChanges();
                         int id = _produktDetails._Produkt.Id;
@@ -199,24 +153,15 @@ namespace LCA_WEB.Controllers
                         for (int i = 0; i < _produktDetails.ProduktRohstoff.Count; i++)
                         {
                             _produktDetails.ProduktRohstoff[i].Rohstoff.Produkt_Id = id;
-                        if (i == 0)
-                            {
-                                _produktDetails.ProduktRohstoff[0].Rohstoff.Menge_in_t = 12;
-                                _produktDetails.ProduktRohstoff[0].Rohstoff.Rohstoff_Id = 3;
-                        }
-                                _db.Rohstoffs.Add(_produktDetails.ProduktRohstoff[i].Rohstoff);
-                                _db.SaveChanges();
+                        
+                            _db.Rohstoffs.Add(_produktDetails.ProduktRohstoff[i].Rohstoff);
+                            _db.SaveChanges();
                                 
                                 for (int j = 0; j < _produktDetails.ProduktRohstoff.ElementAt(i).LRohstoffe.Count; j++)
                                 {
-                                    if (j == 0)
-                                    {
-                                        _produktDetails.ProduktRohstoff.ElementAt(i).LRohstoffe[j].Wert = 12;
-                                        _produktDetails.ProduktRohstoff.ElementAt(i).LRohstoffe[j].Umweltindikator_Id = 10;
-                                    }
-                                    _produktDetails.ProduktRohstoff.ElementAt(i).LRohstoffe.ElementAt(j).Rohstoff_Id =
-                                        _produktDetails.ProduktRohstoff.ElementAt(i).Rohstoff.Id;
-                            _db.Umweltindikatorwerts.Add(_produktDetails.ProduktRohstoff.ElementAt(i).LRohstoffe
+                                   _produktDetails.ProduktRohstoff.ElementAt(i).LRohstoffe.ElementAt(j).Rohstoff_Id =
+                                   _produktDetails.ProduktRohstoff.ElementAt(i).Rohstoff.Id;
+                                    _db.Umweltindikatorwerts.Add(_produktDetails.ProduktRohstoff.ElementAt(i).LRohstoffe
                                         .ElementAt(j));
                                     _db.SaveChanges();
                                 }
@@ -247,9 +192,9 @@ namespace LCA_WEB.Controllers
         
 
         [HttpGet]
-        public ActionResult Edit(int? id=66)
+        public ActionResult Edit(int? Id)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -260,7 +205,7 @@ namespace LCA_WEB.Controllers
             var uw = _db.Umweltindikatorwerts.Select(s => s).ToList();
             for (int i = 0; i < roh.Count; i++)
             {
-                if (roh[i].Produkt_Id == id)
+                if (roh[i].Produkt_Id == Convert.ToInt32(Id))
                 {
                     pr.Rohstoff = roh[i];
                     pr.LRohstoffe = new List<Umweltindikatorwert>();
@@ -278,17 +223,17 @@ namespace LCA_WEB.Controllers
                 produkt = new Produkt_Typ_Rohstoff_Indikator
                 {
                     _Typ_Id = _db.ProduktTyps.ToList(),
-                    _Produkt = _db.Produkts.Find(id),
+                    _Produkt = _db.Produkts.Find(Id),
                     _LIndikator = _db.Umweltindikators.ToList(),
                     _Rohstoffe = _db.Rohstoffes.ToList(),
-                    ProduktRohstoff = lPRUW
+                    ProduktRohstoff = lPRUW,
+                    _MengeEinheit = _db.MengeEinheits.ToList()
                 };
                 
                 if (produkt._Produkt == null)
                 {
                     return HttpNotFound();
                 }
-            
             return View(produkt);
         }
 
@@ -360,13 +305,227 @@ namespace LCA_WEB.Controllers
             return View(_produktDetails);
         }
 
-
-
         [HttpGet()]
-        public ActionResult Details()
+        public ActionResult Details(int? Id)
         {
-            return View();
+            var proid = _db.Produkts.Find(Id);
+            var ro = _db.Rohstoffs.Select(s => s).ToList();
+            var uw = _db.Umweltindikatorwerts.Select(s => s).ToList();
+
+            // var pri = _db.ProduktRohstoffUmweltindikators.Select(s => s).ToList();
+
+            // var roh = _db.Rohstoffes.Select(s => s).ToList();//Finde alle Rohstoffe
+            // var uwi = _db.Umweltindikators.Select(s => s).ToList();//Finde alle Umwelindikatoren
+
+            List<Umweltindikatorwert> lUmweltind = new List<Umweltindikatorwert>();
+            List<Rohstoff> lRohstoff = new List<Rohstoff>();
+            foreach (var itemRo in ro)
+            {
+                if (proid != null && itemRo.Produkt_Id == proid.Id)
+                {
+                    lRohstoff.Add(itemRo);
+                    foreach (var itemUw in uw)
+                    {
+                        if (itemRo.Id == itemUw.Rohstoff_Id)
+                        {
+                            lUmweltind.Add(itemUw);
+                        }
+                    }
+                }
+            }
+
+            Produkt_Typ_Rohstoff_Indikator _view = new Produkt_Typ_Rohstoff_Indikator();
+            _view._Produkt = proid;
+            _view._ProduktTyp = _db.ProduktTyps.FirstOrDefault(i => i.Id == _view._Produkt.Typ_Id);
+            _view._lRohstoff = lRohstoff;
+            _view._Rohstoffe = _db.Rohstoffes.Select(s => s).ToList();
+            _view._lUmweltindi = lUmweltind;
+            _view._LIndikator = _db.Umweltindikators.Select(s => s).ToList();
+
+            //Diagramm-Data
+            List<DataPoint> dataPoints = new List<DataPoint>();
+            foreach (var itemUw in _view._lUmweltindi)
+            {
+                dataPoints.Add(new DataPoint(_view._LIndikator.FirstOrDefault(i => i.Id == itemUw.Umweltindikator_Id).Name, itemUw.Wert));
+            }
+
+            ViewBag.DataPoints = (dataPoints);
+            return View(_view);
         }
+
+        //[HttpGet()]
+        //public ActionResult Details(int? Id)
+        //{
+        //    if (Id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Produkt pro = _db.Produkts.Find(Id);
+        //    ProduktTyp typ = new ProduktTyp();
+        //    var produktTyp = _db.ProduktTyps.Select(s => s).ToList();
+        //    foreach (var item in produktTyp)
+        //    {
+        //        if (pro != null && item.Id == pro.Typ_Id)
+        //        {
+        //            typ = item;
+        //        }
+        //    }
+
+        //    var rohstoffe = _db.Rohstoffs.Select(s => s).ToList();
+        //    var rohstoffeinheit = _db.Rohstoffes.Select(s => s).ToList();
+        //    var mengeeinheit = _db.MengeEinheits.Select(s => s).ToList();
+        //    List<CanvasDiagrammRohstoff> lCanvasRohstoff = new List<CanvasDiagrammRohstoff>();
+        //    List<CanvasDiagrammRohstoff> lCanvasRohstofftemp = new List<CanvasDiagrammRohstoff>();
+        //    CanvasDiagrammRohstoff sd = new CanvasDiagrammRohstoff();
+        //    var umeinheit = _db.Umweltindikators.Select(s => s).ToList();
+        //    var um = _db.Umweltindikatorwerts.Select(s => s).ToList();
+        //    List<CanvasDiagrammIndikator> lCanvasDiagrammIndikators = new List<CanvasDiagrammIndikator>();
+        //    List<CanvasDiagrammIndikator> lCanvasDiagrammIndikatorstemp = new List<CanvasDiagrammIndikator>();
+        //    CanvasDiagrammIndikator sad = new CanvasDiagrammIndikator();
+        //    double rohwert = 0;
+        //    foreach (var item in rohstoffe)
+        //    {
+        //        if (item.Produkt_Id == pro.Id)
+        //        {
+        //            foreach (var lreinheit in rohstoffeinheit)
+        //            {
+        //                if (lreinheit.Id == item.Rohstoff_Id)
+        //                {
+        //                    if (0 != lCanvasRohstoff.Count)
+        //                    {
+
+        //                        for (int i = 0; i < lCanvasRohstoff.Count; i++)
+        //                        {
+        //                            foreach (var meinheit in mengeeinheit)
+        //                            {
+        //                                if (meinheit.Id == item.MengeEinheit_Id)
+        //                                {
+        //                                    if (meinheit.Name.Replace(" ", "") == "g")
+        //                                    {
+        //                                        rohwert = (double)(item.Menge * 1000000);
+        //                                    }
+        //                                    else if (meinheit.Name.Replace(" ", "") == "kg")
+        //                                    {
+        //                                        rohwert = (double)(item.Menge * 1000);
+        //                                    }
+        //                                    else
+        //                                    {
+        //                                        rohwert = (double)(item.Menge);
+        //                                    }
+        //                                }
+        //                            }
+        //                            if (lCanvasRohstoff[i].Name.Replace(" ", "") == lreinheit.Name.Replace(" ", ""))
+        //                            {
+        //                                lCanvasRohstoff[i].Wert = lCanvasRohstoff[i].Wert + rohwert;
+        //                            }
+        //                            else
+        //                            {
+        //                                sd.Wert = rohwert;
+        //                                sd.Name = lreinheit.Name.Replace(" ", "");
+        //                                lCanvasRohstofftemp.Add(sd);
+        //                            }
+        //                        }
+        //                        for (int j = 0; j < lCanvasRohstofftemp.Count; j++)
+        //                        {
+        //                            lCanvasRohstoff.Add(lCanvasRohstofftemp[j]);
+        //                            lCanvasRohstofftemp.Clear();
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        foreach (var meinheit in mengeeinheit)
+        //                        {
+        //                            if (meinheit.Id == item.MengeEinheit_Id)
+        //                            {
+        //                                if (meinheit.Name.Replace(" ", "") == "g")
+        //                                {
+        //                                    if (null != item.Menge)
+        //                                    {
+        //                                        rohwert = (double)(item.Menge * 1000000);
+        //                                    }
+
+        //                                }
+        //                                else if (meinheit.Name.Replace(" ", "") == "kg")
+        //                                {
+        //                                    if (null != item.Menge)
+        //                                    {
+        //                                        rohwert = (double)(item.Menge * 1000);
+        //                                    }
+        //                                }
+        //                                else
+        //                                {
+        //                                    if (null != item.Menge)
+        //                                    {
+        //                                        rohwert = (double)(item.Menge);
+        //                                    }
+        //                                }
+        //                            }
+        //                        }
+        //                        sd.Wert = rohwert;
+        //                        sd.Name = lreinheit.Name.Replace(" ", "");
+        //                        lCanvasRohstoff.Add(sd);
+        //                    }
+        //                    foreach (var umItem in um)
+        //                    {
+        //                        if (umItem.Rohstoff_Id == item.Id)
+        //                        {
+        //                            foreach (var umEinheitItem in umeinheit)
+        //                            {
+        //                                if (umEinheitItem.Id == umItem.Umweltindikator_Id)
+        //                                {
+        //                                    if (0 != lCanvasDiagrammIndikators.Count)
+        //                                    {
+
+        //                                        for(int i = 0;i< lCanvasDiagrammIndikators.Count;i++)
+        //                                        {
+        //                                            if (lCanvasDiagrammIndikators[i].Name.Replace(" ", "") == umEinheitItem.Name.Replace(" ", ""))
+        //                                            {
+        //                                                lCanvasDiagrammIndikators[i].SummeWert =
+        //                                                    (double) (lCanvasDiagrammIndikators[i].SummeWert + umItem.Wert);
+        //                                            }
+        //                                            else
+        //                                            {
+        //                                                sad.SummeWert = (double) umItem.Wert;
+        //                                                sad.Name = umEinheitItem.Name.Replace(" ", "");
+        //                                                lCanvasDiagrammIndikatorstemp.Add(sad);
+        //                                            }
+        //                                        }
+        //                                        for (int j = 0; j < lCanvasDiagrammIndikatorstemp.Count; j++)
+        //                                        {
+        //                                            lCanvasDiagrammIndikators.Add(lCanvasDiagrammIndikatorstemp[j]);
+        //                                            lCanvasDiagrammIndikatorstemp.Clear();
+        //                                        }
+        //                                    }
+        //                                    else
+        //                                    {
+        //                                        sad.SummeWert = (double) umItem.Wert;
+        //                                        sad.Name = umEinheitItem.Name.Replace(" ","");
+        //                                    }
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        //    }
+
+
+
+
+        //    CanvasDiagramm diagramm = new CanvasDiagramm
+        //    {
+        //        CanvasRohstoff = lCanvasRohstoff,
+        //        CanvasIndikator = lCanvasDiagrammIndikators,
+        //        Produkt = pro,
+        //        _ProduktTyp = typ
+        //    };
+
+        //    ViewBag.Rohstoff = lCanvasRohstoff;
+        //    ViewBag.Indikator = lCanvasDiagrammIndikators;
+        //    return View(diagramm);
+        //}
 
         [HttpGet]
         public ActionResult AddIndikator(string whichView)

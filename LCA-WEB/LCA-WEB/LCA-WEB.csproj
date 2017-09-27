@@ -192,75 +192,63 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbWeb.Context.cs">
+    <Compile Include="Models\DbWebModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbWeb.Context.tt</DependentUpon>
+      <DependentUpon>DbWebModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbWeb.cs">
+    <Compile Include="Models\DbWebModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbWeb.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbWeb.Designer.cs">
+    <Compile Include="Models\DbWebModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbWeb.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbWebAsp.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbWebAsp.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbWebAsp.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbWebAsp.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbWebAsp.edmx</DependentUpon>
+      <DependentUpon>DbWebModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\EndOfLifeData.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MengeEinheit.cs">
+      <DependentUpon>DbWebModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Produkt.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProduktRohstoffUmweltindikator.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProduktTyp.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Produkt_Typ_Rohstoff_Indikator.cs" />
     <Compile Include="Models\Rohstoff.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rohstoffe.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Umweltindikator.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Umweltindikatorwert.cs">
-      <DependentUpon>DbWebAsp.tt</DependentUpon>
+      <DependentUpon>DbWebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -282,43 +270,30 @@
     <Content Include="Images\CradleToGrave.png" />
     <Content Include="Images\LogoGBUI_dunkelBlauHG.png" />
     <Content Include="Images\Ökobilanz.png" />
-    <Content Include="Models\DbWeb.Context.tt">
+    <Content Include="Models\DbWebModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbWeb.edmx</DependentUpon>
-      <LastGenOutput>DbWeb.Context.cs</LastGenOutput>
+      <DependentUpon>DbWebModel.edmx</DependentUpon>
+      <LastGenOutput>DbWebModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DbWeb.tt">
+    <Content Include="Models\DbWebModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbWeb.edmx</DependentUpon>
-      <LastGenOutput>DbWeb.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DbWebAsp.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbWebAsp.edmx</DependentUpon>
-      <LastGenOutput>DbWebAsp.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DbWebAsp.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbWebAsp.edmx</DependentUpon>
-      <LastGenOutput>DbWebAsp.cs</LastGenOutput>
+      <DependentUpon>DbWebModel.edmx</DependentUpon>
+      <LastGenOutput>DbWebModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\DbWeb.edmx">
+    <EntityDeploy Include="Models\DbWebModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DbWeb.Designer.cs</LastGenOutput>
+      <LastGenOutput>DbWebModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DbWeb.edmx.diagram">
-      <DependentUpon>DbWeb.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\DbWebAsp.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DbWebAsp.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DbWebAsp.edmx.diagram">
-      <DependentUpon>DbWebAsp.edmx</DependentUpon>
+    <Content Include="Models\DbWebModel.edmx.diagram">
+      <DependentUpon>DbWebModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.bundle.js" />
+    <Content Include="Scripts\Chart.bundle.min.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

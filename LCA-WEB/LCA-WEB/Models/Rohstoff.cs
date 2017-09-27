@@ -24,9 +24,11 @@ namespace LCA_WEB.Models
     
         public int Id { get; set; }
         public int Rohstoff_Id { get; set; }
-        public Nullable<decimal> Menge_in_t { get; set; }
+        public Nullable<decimal> Menge { get; set; }
         public Nullable<int> Produkt_Id { get; set; }
+        public Nullable<int> MengeEinheit_Id { get; set; }
     
+        public virtual MengeEinheit MengeEinheit { get; set; }
         public virtual Produkt Produkt { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EndOfLifeData> EndOfLifeDatas { get; set; }

@@ -26,7 +26,7 @@ namespace LCA_WEB
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/Style.css"));
-
+            bundles.Add(new ScriptBundle("~/bundles/Chart").Include("~/Scripts/Chart.js"));
             // Festlegen von "EnableOptimizations" auf "false" für Debugzwecke. Weitere Informationen
             // finden Sie unter "http://go.microsoft.com/fwlink/?LinkId=301862".
             BundleTable.EnableOptimizations = true;
